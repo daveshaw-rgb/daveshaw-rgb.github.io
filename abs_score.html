@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The ABS Score: An Interactive Explainer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutral Harmony -->
+    <!-- Application Structure Plan: The application is designed as a single-page, scrolling experience with a fixed top navigation for easy access to key thematic sections. This structure was chosen over a direct report-to-page translation to create a more engaging and user-directed flow. The sections are: 1) A high-level introduction (What is ABS?), 2) An interactive calculator and process diagram (How is it calculated?), 3) Strategic context and stakeholder impacts (Why does it matter?), and 4) A summary of real-world challenges (What are the limitations?). This architecture guides the user from a basic understanding to a nuanced, critical perspective, using interaction to reinforce learning, which is more effective for usability than a linear text document. -->
+    <!-- Visualization & Content Choices: 1) ABS Score Calculator: Report Info -> Calculation Inputs (Start/End SAP, Floor Area). Goal -> Explain the core calculation. Viz/Method -> Interactive HTML form elements (selects, range slider). Interaction -> User selects inputs, a simulated score is displayed instantly. Justification -> Makes the abstract formula tangible and easy to grasp. Library/Method -> Vanilla JS. 2) Retrofit Process Diagram: Report Info -> Roles of Assessor, Coordinator, Installer. Goal -> Organize the ecosystem. Viz/Method -> HTML/CSS Flexbox diagram. Interaction -> Static visual flow. Justification -> Clearly illustrates the sequence of events. Library/Method -> Tailwind CSS. 3) Performance Gap Chart: Report Info -> "Performance Gap" criticism. Goal -> Compare theoretical vs. actual savings. Viz/Method -> Vertical Bar Chart. Interaction -> Hover tooltips. Justification -> A bar chart is the most direct way to visualize the disparity. Library/Method -> Chart.js/Canvas. 4) Stakeholder Tabs: Report Info -> Implications for different groups. Goal -> Organize perspectives. Viz/Method -> Tabbed content panes. Interaction -> User clicks tabs to switch views. Justification -> Segments information cleanly, reducing cognitive load. Library/Method -> Vanilla JS. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FDFBF8; /* Warm off-white */
+            color: #403A3A; /* Dark brown-gray */
+        }
+        .nav-link {
+            transition: color 0.3s ease, border-bottom-color 0.3s ease;
+            border-bottom: 2px solid transparent;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: #C7A587; /* Muted accent */
+            border-bottom-color: #C7A587;
+        }
+        .card {
+            background-color: #FFFFFF;
+            border: 1px solid #EAE5E1; /* Light beige border */
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.07), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .btn {
+            background-color: #8D7B68; /* Muted brown */
+            color: #FFFFFF;
+            transition: background-color 0.3s ease;
+        }
+        .btn:hover {
+            background-color: #716253;
+        }
+        .tab {
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-bottom: 2px solid transparent;
+        }
+        .tab.active {
+            color: #8D7B68;
+            border-bottom-color: #8D7B68;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 border-b border-gray-200/50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-xl font-bold text-[#8D7B68]">ABS Score Explainer</h1>
+            <div class="hidden md:flex space-x-8">
+                <a href="#how-it-works" class="nav-link font-medium pb-1">How It Works</a>
+                <a href="#big-picture" class="nav-link font-medium pb-1">The Big Picture</a>
+                <a href="#challenges" class="nav-link font-medium pb-1">Challenges & Reality</a>
+                <a href="#glossary" class="nav-link font-medium pb-1">Glossary</a>
+            </div>
+            <div class="md:hidden">
+                <select id="mobile-nav" class="bg-white border border-gray-300 rounded-md py-2 px-3 text-gray-700">
+                    <option value="#hero">Home</option>
+                    <option value="#how-it-works">How It Works</option>
+                    <option value="#big-picture">The Big Picture</option>
+                    <option value="#challenges">Challenges & Reality</option>
+                    <option value="#glossary">Glossary</option>
+                </select>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-6 py-8 md:py-16">
+
+        <section id="hero" class="text-center mb-16 md:mb-24">
+            <h2 class="text-4xl md:text-5xl font-bold mb-4 tracking-tight">Understanding the ABS Score</h2>
+            <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+                The **Annual Bill Savings (ABS) score** is the engine of the UK's ECO4 scheme, designed to fund deep energy retrofits for homes. This interactive guide breaks down what it is, how it's calculated, and why it matters for homeowners, installers, and the UK's net-zero goals.
+            </p>
+        </section>
+
+        <section id="how-it-works" class="mb-16 md:mb-24">
+            <div class="text-center mb-12">
+                <h3 class="text-3xl font-bold">How the ABS Score is Calculated</h3>
+                <p class="text-lg text-gray-600 mt-2 max-w-2xl mx-auto">The score isn't just one number; it's the result of a property's transformation. The primary goal is to significantly improve a home's energy efficiency, measured by its SAP rating. Use the simulator below to see how different factors influence a project's potential score.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
+                <div class="card p-6 md:p-8">
+                    <h4 class="text-xl font-semibold mb-4">ABS Score Simulator</h4>
+                    <p class="text-gray-500 mb-6">Select a property's starting and target efficiency, and its size, to see a simulated ABS score. Higher scores mean more funding.</p>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <label for="startEPC" class="block text-sm font-medium text-gray-700">Starting EPC Band</label>
+                            <select id="startEPC" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-[#C7A587] focus:border-[#C7A587] sm:text-sm rounded-md">
+                                <option value="G">G (SAP 1-20) - Very Inefficient</option>
+                                <option value="F">F (SAP 21-38)</option>
+                                <option value="E">E (SAP 39-54)</option>
+                                <option value="D">D (SAP 55-68)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="endEPC" class="block text-sm font-medium text-gray-700">Target EPC Band</label>
+                            <select id="endEPC" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-[#C7A587] focus:border-[#C7A587] sm:text-sm rounded-md">
+                                <option value="D">D (SAP 55-68)</option>
+                                <option value="C">C (SAP 69-80) - Target</option>
+                                <option value="B">B (SAP 81-91)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="floorArea" class="block text-sm font-medium text-gray-700">Total Floor Area (m²): <span id="floorAreaValue" class="font-bold">100</span></label>
+                            <input id="floorArea" type="range" min="50" max="250" value="100" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+                        </div>
+                    </div>
+
+                    <div class="mt-8 pt-6 border-t border-gray-200 text-center">
+                        <p class="text-sm text-gray-500">Simulated Full Project Score (FPS)</p>
+                        <p id="absScoreResult" class="text-4xl font-bold text-[#8D7B68] transition-all duration-300">£450</p>
+                        <p class="text-xs text-gray-400 mt-2">(Illustrative value based on deemed score logic)</p>
+                    </div>
+                </div>
+
+                <div class="space-y-6">
+                    <h4 class="text-xl font-semibold text-center lg:text-left">The Retrofit Journey</h4>
+                    <p class="text-gray-600 text-center lg:text-left">Achieving an ABS score involves a standardized, multi-step process governed by the PAS 2035 framework, ensuring quality and compliance from start to finish.</p>
+                    <div class="space-y-4">
+                        <div class="flex items-start space-x-4 p-4 bg-white rounded-lg border border-gray-200/80">
+                            <div class="flex-shrink-0 bg-[#EAE5E1] text-[#8D7B68] h-10 w-10 flex items-center justify-center rounded-full font-bold text-lg">1</div>
+                            <div>
+                                <h5 class="font-semibold">Retrofit Assessment</h5>
+                                <p class="text-gray-500 text-sm">A qualified assessor conducts a whole-house survey, gathering data on insulation, heating, and condition to establish the starting SAP score.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4 p-4 bg-white rounded-lg border border-gray-200/80">
+                            <div class="flex-shrink-0 bg-[#EAE5E1] text-[#8D7B68] h-10 w-10 flex items-center justify-center rounded-full font-bold text-lg">2</div>
+                            <div>
+                                <h5 class="font-semibold">Project Coordination</h5>
+                                <p class="text-gray-500 text-sm">A Retrofit Coordinator designs a comprehensive improvement plan, ensuring all measures work together effectively and meet PAS 2035 standards.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4 p-4 bg-white rounded-lg border border-gray-200/80">
+                            <div class="flex-shrink-0 bg-[#EAE5E1] text-[#8D7B68] h-10 w-10 flex items-center justify-center rounded-full font-bold text-lg">3</div>
+                            <div>
+                                <h5 class="font-semibold">Installation & Verification</h5>
+                                <p class="text-gray-500 text-sm">Accredited installers carry out the work. Each measure is lodged in the TrustMark Data Warehouse, allowing for tracking and quality assurance.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4 p-4 bg-white rounded-lg border border-gray-200/80">
+                            <div class="flex-shrink-0 bg-[#EAE5E1] text-[#8D7B68] h-10 w-10 flex items-center justify-center rounded-full font-bold text-lg">4</div>
+                            <div>
+                                <h5 class="font-semibold">Final Scoring</h5>
+                                <p class="text-gray-500 text-sm">After a post-retrofit assessment confirms the new SAP score, the final Full Project Score (FPS) is calculated and awarded.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="big-picture" class="mb-16 md:mb-24">
+            <div class="text-center mb-12">
+                <h3 class="text-3xl font-bold">The Big Picture: Strategy and Stakeholders</h3>
+                <p class="text-lg text-gray-600 mt-2 max-w-2xl mx-auto">The ABS score is more than a calculation; it's a policy tool designed to reshape the retrofit market and impact everyone involved.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                <div class="card p-6 md:p-8">
+                    <h4 class="font-semibold text-xl mb-3">From ECO3 to ECO4: A Major Shift</h4>
+                    <p class="text-gray-600 mb-4">The move from Lifetime Bill Savings (LBS) to Annual Bill Savings (ABS) was a deliberate strategy to incentivize deeper, more impactful retrofits.</p>
+                    <div class="flex justify-around text-center">
+                        <div class="w-1/2 pr-4 border-r border-gray-200">
+                            <h5 class="font-bold text-lg">ECO3</h5>
+                            <p class="text-sm text-gray-500">Lifetime Savings (LBS)</p>
+                            <p class="mt-2 text-sm">Valued single measures over their lifetime, often leading to shallow, piecemeal upgrades.</p>
+                        </div>
+                        <div class="w-1/2 pl-4">
+                            <h5 class="font-bold text-lg text-[#8D7B68]">ECO4</h5>
+                            <p class="text-sm text-gray-500">Annual Savings (ABS)</p>
+                            <p class="mt-2 text-sm">Values the **annual** saving from a **whole-house** upgrade, pushing for significant EPC band improvements.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card p-6 md:p-8">
+                     <h4 class="font-semibold text-xl mb-3">Impact on Stakeholders</h4>
+                     <p class="text-gray-600 mb-4">The system creates different incentives and challenges for each group in the retrofit ecosystem.</p>
+                     <div>
+                        <div class="flex border-b border-gray-200">
+                            <div id="tab-installers" class="tab p-3 flex-1 text-center font-medium active">Installers</div>
+                            <div id="tab-homeowners" class="tab p-3 flex-1 text-center font-medium">Homeowners</div>
+                            <div id="tab-suppliers" class="tab p-3 flex-1 text-center font-medium">Suppliers</div>
+                        </div>
+                        <div id="content-installers" class="tab-content pt-4 text-sm text-gray-600">
+                           <p><strong>Incentive:</strong> Higher funding for complex, multi-measure projects on the least efficient homes. The PPS system helps with cash flow on long jobs.</p>
+                           <p class="mt-2"><strong>Challenge:</strong> Must shift from single-measure jobs to whole-house project management. High compliance costs and pressure to complete projects to get the full score.</p>
+                        </div>
+                        <div id="content-homeowners" class="tab-content pt-4 text-sm text-gray-600 hidden">
+                            <p><strong>Incentive:</strong> Access to significant grant funding for major home upgrades, leading to lower bills and improved comfort.</p>
+                            <p class="mt-2"><strong>Challenge:</strong> Dependent on a constrained supply of qualified installers. Risk of poor workmanship and difficulty finding recourse if issues arise.</p>
+                        </div>
+                         <div id="content-suppliers" class="tab-content pt-4 text-sm text-gray-600 hidden">
+                            <p><strong>Incentive:</strong> A clear, standardized metric to meet their government-mandated obligations under the ECO scheme.</p>
+                            <p class="mt-2"><strong>Challenge:</strong> Must fund a complex delivery chain and are reliant on the installer network to meet targets, facing penalties for shortfalls.</p>
+                        </div>
+                     </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="challenges" class="mb-16 md:mb-24">
+            <div class="text-center mb-12">
+                <h3 class="text-3xl font-bold">Challenges & Real-World Gaps</h3>
+                <p class="text-lg text-gray-600 mt-2 max-w-2xl mx-auto">While the ABS score is a robust theoretical model, its real-world implementation faces significant hurdles that can impact outcomes.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
+                <div>
+                    <h4 class="text-xl font-semibold mb-4">Key Systemic Issues</h4>
+                    <div class="space-y-4">
+                        <div class="card p-4">
+                            <h5 class="font-semibold">Constrained Supply Chain</h5>
+                            <p class="text-sm text-gray-600">There is a shortage of qualified and accredited installers, making it difficult to deliver retrofits at the scale and speed required to meet ECO4 targets.</p>
+                        </div>
+                        <div class="card p-4">
+                            <h5 class="font-semibold">High Upfront Costs</h5>
+                            <p class="text-sm text-gray-600">The costs for detailed assessments, coordination, and compliance with PAS 2035 are high, discouraging smaller installers and single-measure jobs.</p>
+                        </div>
+                        <div class="card p-4">
+                            <h5 class="font-semibold">Quality Control Concerns</h5>
+                            <p class="text-sm text-gray-600">Reports from homeowners highlight issues with workmanship and project management, indicating a need for stronger oversight and accountability.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card p-6 md:p-8">
+                    <h4 class="text-xl font-semibold mb-2 text-center">The "Performance Gap"</h4>
+                    <p class="text-center text-gray-600 mb-4">The ABS score is a "deemed" saving, based on models. Actual savings can be lower due to installation quality, occupant behavior, and other real-world factors.</p>
+                    <div class="chart-container">
+                        <canvas id="performanceGapChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="glossary" class="bg-white p-6 md:p-8 rounded-lg border border-gray-200/80">
+            <div class="text-center mb-8">
+                <h3 class="text-3xl font-bold">Glossary of Key Terms</h3>
+                <p class="text-lg text-gray-600 mt-2">A quick reference for the core concepts in the ECO4 and retrofit landscape.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div>
+                    <h5 class="font-semibold">ABS (Annual Bill Savings)</h5>
+                    <p class="text-sm text-gray-600">The core metric of ECO4, representing the estimated annual financial saving from energy efficiency measures.</p>
+                </div>
+                <div>
+                    <h5 class="font-semibold">SAP (Standard Assessment Procedure)</h5>
+                    <p class="text-sm text-gray-600">The UK's official methodology for calculating a home's energy performance, resulting in a score from 1-100+.</p>
+                </div>
+                <div>
+                    <h5 class="font-semibold">EPC (Energy Performance Certificate)</h5>
+                    <p class="text-sm text-gray-600">A user-friendly certificate that displays the SAP score in bands from A (most efficient) to G (least efficient).</p>
+                </div>
+                <div>
+                    <h5 class="font-semibold">FPS (Full Project Score)</h5>
+                    <p class="text-sm text-gray-600">The final, full score awarded when a retrofit project meets the minimum required EPC band improvement.</p>
+                </div>
+                <div>
+                    <h5 class="font-semibold">PPS (Partial Project Score)</h5>
+                    <p class="text-sm text-gray-600">A deflated, interim score paid for individual measures to help installer cash flow during a long project.</p>
+                </div>
+                <div>
+                    <h5 class="font-semibold">PAS 2035</h5>
+                    <p class="text-sm text-gray-600">The overarching standard and framework for carrying out high-quality, safe, and effective domestic retrofits in the UK.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <footer class="text-center py-8 mt-12 border-t border-gray-200/80">
+        <p class="text-gray-500">An interactive summary based on the report: "A Comprehensive Analysis of the Annual Bill Savings (ABS) Score".</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const epcValues = { G: 10, F: 30, E: 47, D: 62, C: 75, B: 86 };
+            const startEPC = document.getElementById('startEPC');
+            const endEPC = document.getElementById('endEPC');
+            const floorArea = document.getElementById('floorArea');
+            const floorAreaValue = document.getElementById('floorAreaValue');
+            const absScoreResult = document.getElementById('absScoreResult');
+
+            function calculateABS() {
+                const startVal = epcValues[startEPC.value];
+                const endVal = epcValues[endEPC.value];
+                const area = parseInt(floorArea.value);
+
+                if (endVal <= startVal) {
+                    absScoreResult.textContent = '£0';
+                    absScoreResult.classList.add('text-red-500');
+                    return;
+                }
+                absScoreResult.classList.remove('text-red-500');
+
+                const improvement = endVal - startVal;
+                const areaMultiplier = 1 + (area - 50) / 200; 
+                const baseSaving = 150; 
+                
+                let score = baseSaving + (improvement * 10) * areaMultiplier;
+                score = Math.round(score / 5) * 5; 
+
+                absScoreResult.textContent = `£${score}`;
+            }
+
+            floorArea.addEventListener('input', () => {
+                floorAreaValue.textContent = floorArea.value;
+                calculateABS();
+            });
+            startEPC.addEventListener('change', calculateABS);
+            endEPC.addEventListener('change', calculateABS);
+            
+            calculateABS();
+
+            const tabs = document.querySelectorAll('.tab');
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    const targetId = tab.id.replace('tab-', 'content-');
+                    tabContents.forEach(content => {
+                        if (content.id === targetId) {
+                            content.classList.remove('hidden');
+                        } else {
+                            content.classList.add('hidden');
+                        }
+                    });
+                });
+            });
+
+            const ctx = document.getElementById('performanceGapChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Energy Bill Savings'],
+                    datasets: [{
+                        label: 'Deemed Savings (ABS Score)',
+                        data: [450],
+                        backgroundColor: 'rgba(141, 123, 104, 0.7)',
+                        borderColor: 'rgba(141, 123, 104, 1)',
+                        borderWidth: 1
+                    }, {
+                        label: 'Potential Actual Savings',
+                        data: [360],
+                        backgroundColor: 'rgba(199, 165, 135, 0.7)',
+                        borderColor: 'rgba(199, 165, 135, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'top' },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) { label += ': '; }
+                                    if (context.parsed.y !== null) {
+                                        label += new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP' }).format(context.parsed.y);
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return '£' + value;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            const mobileNav = document.getElementById('mobile-nav');
+            mobileNav.addEventListener('change', (e) => {
+                const targetId = e.target.value;
+                if (targetId) {
+                    document.querySelector(targetId).scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
