@@ -1,316 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Asset Cool - Big Change POC Infographic</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- Chosen Palette: Brilliant Blues -->
-    <!-- Application Structure Plan: The infographic follows a logical narrative flow designed to tell the story of the Proof of Concept. It starts with a high-level objective (the "why"), moves to the core deliverables (the "what" - Success Criteria), visualizes the process (the "how" - Workflow), presents the key metric to be tracked (the "proof" - Data Insights), addresses potential roadblocks (the "contingency" - Challenges), and concludes with the investment required (the "cost" - Resources). This top-down, narrative structure makes the complex plan easily digestible for stakeholders, allowing them to grasp the full scope and value proposition at a glance. -->
-    <!-- Visualization & Content Choices: 
-        - POC Objective -> Goal: Inform -> Viz: Large, bold text -> Justification: Immediately establishes the core purpose of the project.
-        - Success Criteria -> Goal: Organize -> Viz: 4 distinct HTML/CSS cards in a grid -> Justification: Clearly separates the key, measurable outcomes, making them easy to read and remember.
-        - Field Workflow -> Goal: Organize/Change -> Viz: Horizontal HTML/CSS flowchart -> Justification: Translates the abstract field service process into a simple, linear visual journey, making the solution's impact tangible.
-        - Real-Time Metrics -> Goal: Compare -> Viz: Chart.js Bar Chart -> Justification: Visually demonstrates the primary success metric (Criterion 1), showing a direct comparison of "cleaned" vs. "coated" progress, which is a key pain point.
-        - Technical Challenges -> Goal: Inform -> Viz: 3 styled HTML/CSS cards with "Challenge" and "Mitigation" sections -> Justification: Presents potential risks and their solutions in a clear, structured format, demonstrating foresight.
-        - Resource Allocation -> Goal: Compare/Inform -> Viz: Chart.js Donut Charts -> Justification: Provides a quick, proportional view of the time investment from both the technical team and the customer, making the resource estimate easy to understand.
-    -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f0f4f8;
-        }
-        .chart-container {
-            position: relative;
-            width: 100%;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-            height: 350px;
-            max-height: 450px;
-        }
-        .donut-chart-container {
-            position: relative;
-            width: 100%;
-            max-width: 250px;
-            margin-left: auto;
-            margin-right: auto;
-            height: 250px;
-        }
-        @media (min-width: 768px) {
-            .chart-container {
-                height: 450px;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resource Links</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f8f9fa;
+      color: #333;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    li {
+      background: #fff;
+      padding: 15px 20px;
+      margin: 10px 0;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s;
+    }
+    li:hover {
+      transform: translateY(-2px);
+    }
+    a {
+      text-decoration: none;
+      color: #007bff;
+      font-weight: bold;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 0.9em;
+      color: #666;
+    }
+  </style>
 </head>
-<body class="text-gray-800">
-
-    <div class="container mx-auto p-4 md:p-8 max-w-6xl">
-
-        <header class="text-center my-12">
-            <h1 class="text-5xl md:text-6xl font-extrabold text-[#003F5C] mb-4">Asset Cool + Big Change</h1>
-            <h2 class="text-2xl md:text-3xl font-semibold text-[#665191]">Proof of Concept: The Path to Paperless Operations</h2>
-        </header>
-
-        <section id="objective" class="bg-white rounded-2xl shadow-lg p-8 md:p-12 mb-16 text-center">
-            <h3 class="text-3xl font-bold text-[#003F5C] mb-4">Primary Objective</h3>
-            <p class="text-lg md:text-xl text-gray-700 max-w-4xl mx-auto leading-relaxed">
-                To demonstrate that the Big Change platform can serve as a comprehensive, paperless Field Service Management system for Asset Cool, specifically by automating job scheduling, capturing critical on-site data, and providing real-time operational insights to streamline their pylon cleaning and coating workflows.
-            </p>
-        </section>
-
-        <section id="criteria" class="mb-16">
-            <h3 class="text-4xl font-extrabold text-center text-[#003F5C] mb-10">The 4 Pillars of Success</h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="bg-[#2F4B7C] text-white p-8 rounded-2xl shadow-md transform hover:scale-105 transition-transform duration-300">
-                    <div class="flex items-center mb-4">
-                        <span class="text-5xl font-bold text-[#FFA600] mr-4">1</span>
-                        <h4 class="text-2xl font-bold">Real-Time Reporting</h4>
-                    </div>
-                    <p>A live dashboard will display total meters cleaned and coated within a 5-minute delay of job completion, proving real-time data visibility.</p>
-                </div>
-                <div class="bg-[#665191] text-white p-8 rounded-2xl shadow-md transform hover:scale-105 transition-transform duration-300">
-                    <div class="flex items-center mb-4">
-                        <span class="text-5xl font-bold text-[#FFA600] mr-4">2</span>
-                        <h4 class="text-2xl font-bold">Seamless Data Import</h4>
-                    </div>
-                    <p>Successfully import and display all relevant pylon and cable GIS data into the Big Change CRM, proving system compatibility.</p>
-                </div>
-                <div class="bg-[#A05195] text-white p-8 rounded-2xl shadow-md transform hover:scale-105 transition-transform duration-300">
-                    <div class="flex items-center mb-4">
-                        <span class="text-5xl font-bold text-[#FFA600] mr-4">3</span>
-                        <h4 class="text-2xl font-bold">Video Evidence Capture</h4>
-                    </div>
-                    <p>Establish a workflow for hyperlinking on-site video footage to a job card, validating the quality and auditing process.</p>
-                </div>
-                <div class="bg-[#D45087] text-white p-8 rounded-2xl shadow-md transform hover:scale-105 transition-transform duration-300">
-                    <div class="flex items-center mb-4">
-                        <span class="text-5xl font-bold text-[#FFA600] mr-4">4</span>
-                        <h4 class="text-2xl font-bold">Automated Rescheduling</h4>
-                    </div>
-                    <p>Demonstrate that jobs marked incomplete due to weather automatically create a new job for rescheduling, mitigating operational risk.</p>
-                </div>
-            </div>
-        </section>
-        
-        <section id="workflow" class="mb-16">
-            <h3 class="text-4xl font-extrabold text-center text-[#003F5C] mb-10">Visualizing the Digital Workflow</h3>
-            <div class="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0 md:space-x-4 p-6 bg-white rounded-2xl shadow-lg">
-                <div class="text-center flex-1">
-                    <div class="text-5xl mb-2">📅</div>
-                    <h4 class="font-bold text-[#003F5C]">1. Job Assigned</h4>
-                    <p class="text-sm text-gray-600">Receive automated job on mobile device.</p>
-                </div>
-                <div class="w-full md:w-16 h-1 md:h-auto bg-gradient-to-r md:bg-gradient-to-b from-[#F95D6A] to-[#FF7C43] rounded-full"></div>
-                <div class="text-center flex-1">
-                    <div class="text-5xl mb-2">📱</div>
-                    <h4 class="font-bold text-[#003F5C]">2. On-Site Data</h4>
-                    <p class="text-sm text-gray-600">Complete vehicle checks & risk assessments.</p>
-                </div>
-                 <div class="w-full md:w-16 h-1 md:h-auto bg-gradient-to-r md:bg-gradient-to-b from-[#F95D6A] to-[#FF7C43] rounded-full"></div>
-                <div class="text-center flex-1">
-                    <div class="text-5xl mb-2">🤖</div>
-                    <h4 class="font-bold text-[#003F5C]">3. Execute Task</h4>
-                    <p class="text-sm text-gray-600">Clean/Coat pylon with real-time tracking.</p>
-                </div>
-                 <div class="w-full md:w-16 h-1 md:h-auto bg-gradient-to-r md:bg-gradient-to-b from-[#F95D6A] to-[#FF7C43] rounded-full"></div>
-                <div class="text-center flex-1">
-                    <div class="text-5xl mb-2">📹</div>
-                    <h4 class="font-bold text-[#003F5C]">4. Capture Proof</h4>
-                    <p class="text-sm text-gray-600">Attach photos & video links to the job.</p>
-                </div>
-                 <div class="w-full md:w-16 h-1 md:h-auto bg-gradient-to-r md:bg-gradient-to-b from-[#F95D6A] to-[#FF7C43] rounded-full"></div>
-                <div class="text-center flex-1">
-                    <div class="text-5xl mb-2">✅</div>
-                    <h4 class="font-bold text-[#003F5C]">5. Job Complete</h4>
-                    <p class="text-sm text-gray-600">Data syncs instantly to the office dashboard.</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="data-insights" class="bg-white rounded-2xl shadow-lg p-8 md:p-12 mb-16">
-            <h3 class="text-4xl font-extrabold text-center text-[#003F5C] mb-2">Tracking Key Metrics in Real-Time</h3>
-            <p class="text-center text-gray-600 mb-8 max-w-3xl mx-auto">This chart simulates the live dashboard that will track progress across different pylons, providing immediate insight into field performance and addressing a core requirement of the POC.</p>
-            <div class="chart-container">
-                <canvas id="progressChart"></canvas>
-            </div>
-        </section>
-
-        <section id="challenges" class="mb-16">
-            <h3 class="text-4xl font-extrabold text-center text-[#003F5C] mb-10">Navigating Technical Challenges</h3>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-white p-6 rounded-2xl shadow-md border-l-8 border-[#FF7C43]">
-                    <h4 class="text-xl font-bold text-[#003F5C] mb-3">Robot Data Integration</h4>
-                    <p class="text-sm text-gray-600"><strong class="text-gray-800">Mitigation:</strong> Demonstrate API call capability with simulated data to prove the concept while confirming robot API availability with the Asset Cool team.</p>
-                </div>
-                <div class="bg-white p-6 rounded-2xl shadow-md border-l-8 border-[#FF7C43]">
-                    <h4 class="text-xl font-bold text-[#003F5C] mb-3">Complex Scheduling</h4>
-                    <p class="text-sm text-gray-600"><strong class="text-gray-800">Mitigation:</strong> Focus the POC on a single, well-defined circuit to prove core scheduling logic before scaling to more complex scenarios.</p>
-                </div>
-                <div class="bg-white p-6 rounded-2xl shadow-md border-l-8 border-[#FF7C43]">
-                    <h4 class="text-xl font-bold text-[#003F5C] mb-3">Specific Team Workflows</h4>
-                    <p class="text-sm text-gray-600"><strong class="text-gray-800">Mitigation:</strong> Build out the team structure using resource groups and team-based assignments to mirror their exact operational hierarchy.</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="resources" class="bg-white rounded-2xl shadow-lg p-8 md:p-12">
-            <h3 class="text-4xl font-extrabold text-center text-[#003F5C] mb-10">Resource & Time Investment</h3>
-            <div class="flex flex-col md:flex-row justify-around items-center">
-                <div class="text-center mb-8 md:mb-0">
-                    <h4 class="text-2xl font-bold text-[#665191] mb-4">SE/Technical Team</h4>
-                    <div class="donut-chart-container">
-                        <canvas id="seHoursChart"></canvas>
-                    </div>
-                </div>
-                <div class="text-center">
-                    <h4 class="text-2xl font-bold text-[#D45087] mb-4">Asset Cool Team</h4>
-                    <div class="donut-chart-container">
-                        <canvas id="customerHoursChart"></canvas>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-    </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const progressCtx = document.getElementById('progressChart').getContext('2d');
-            new Chart(progressCtx, {
-                type: 'bar',
-                data: {
-                    labels: ['Pylon Z-101', 'Pylon Z-102', 'Pylon Z-103', 'Pylon Z-104', 'Pylon Z-105'],
-                    datasets: [{
-                        label: 'Meters Cleaned',
-                        data: [4200, 3800, 4500, 2900, 4100],
-                        backgroundColor: '#2F4B7C',
-                        borderRadius: 6,
-                    }, {
-                        label: 'Meters Coated',
-                        data: [4200, 3800, 3100, 0, 0],
-                        backgroundColor: '#A05195',
-                        borderRadius: 6,
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            grid: { color: '#e0e0e0' },
-                            ticks: { font: { weight: '600' } }
-                        },
-                        x: {
-                            grid: { display: false },
-                            ticks: { font: { weight: '600' } }
-                        }
-                    },
-                    plugins: {
-                        legend: {
-                            position: 'top',
-                            labels: { font: { size: 14, weight: '600' } }
-                        },
-                        tooltip: {
-                            enabled: true,
-                            backgroundColor: '#003F5C',
-                            titleFont: { size: 16, weight: 'bold' },
-                            bodyFont: { size: 14 },
-                            callbacks: {
-                                title: function(tooltipItems) {
-                                    const item = tooltipItems[0];
-                                    let label = item.chart.data.labels[item.dataIndex];
-                                    if (Array.isArray(label)) {
-                                      return label.join(' ');
-                                    } else {
-                                      return label;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            });
-
-            const seHoursCtx = document.getElementById('seHoursChart').getContext('2d');
-            new Chart(seHoursCtx, {
-                type: 'doughnut',
-                data: {
-                    labels: ['Setup & Config', 'Demonstration'],
-                    datasets: [{
-                        label: 'Hours',
-                        data: [18, 2],
-                        backgroundColor: ['#003F5C', '#665191'],
-                        borderColor: '#ffffff',
-                        borderWidth: 4,
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: { display: false },
-                        title: { display: true, text: '15-20 Hours Total', font: { size: 18, weight: 'bold' }, color: '#003F5C' },
-                        tooltip: {
-                            callbacks: {
-                                title: function(tooltipItems) {
-                                    const item = tooltipItems[0];
-                                    let label = item.chart.data.labels[item.dataIndex];
-                                    if (Array.isArray(label)) {
-                                      return label.join(' ');
-                                    } else {
-                                      return label;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            });
-
-            const customerHoursCtx = document.getElementById('customerHoursChart').getContext('2d');
-            new Chart(customerHoursCtx, {
-                type: 'doughnut',
-                data: {
-                    labels: ['Data & Feedback', 'Confirmation'],
-                    datasets: [{
-                        label: 'Hours',
-                        data: [4, 1],
-                        backgroundColor: ['#D45087', '#F95D6A'],
-                        borderColor: '#ffffff',
-                        borderWidth: 4,
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: { display: false },
-                        title: { display: true, text: '5 Hours Total', font: { size: 18, weight: 'bold' }, color: '#D45087' },
-                        tooltip: {
-                            callbacks: {
-                                title: function(tooltipItems) {
-                                    const item = tooltipItems[0];
-                                    let label = item.chart.data.labels[item.dataIndex];
-                                    if (Array.isArray(label)) {
-                                      return label.join(' ');
-                                    } else {
-                                      return label;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            });
-        });
-    </script>
+<body>
+  <h1>Available Resources</h1>
+  <ul>
+    <li><a href="abs_score.html">Retrofit Scotland ABS Information</a></li>
+    <li><a href="fm.html">Facilities Management Companies</a></li>
+    <li><a href="vts.html">VTS Infromation</a></li>
+    <li><a href="assetcool.html">AssetCool</a></li>
+  </ul>
+  <footer>© 2025 Your Organization Name</footer>
 </body>
 </html>
