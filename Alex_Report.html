@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hubspot Deal Analysis Infographic</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Energetic & Playful -->
+    <!-- Application Structure Plan: The infographic tells a story starting with high-level KPIs (Total MRR, Total Deals) to hook the user. It then moves to a compositional view of the pipeline with a 'Deal Stage Distribution' donut chart. A flowchart visualizes the sales process itself. The narrative then deepens into performance analysis, comparing deal owners by volume and value. Finally, it provides an in-depth value analysis, breaking down MRR and license counts by stage. This top-down structure (from summary to detail) is chosen for its logical flow and ease of understanding for a business audience. -->
+    <!-- Visualization & Content Choices: 
+        - Total MRR/Deals -> Goal: Inform -> Viz/Presentation Method: Single Big Number -> Interaction: None -> Justification: Provides immediate, high-impact KPIs. Library/Method: HTML/CSS. CONFIRMING: NO SVG/Mermaid.
+        - Deal Stage Distribution -> Goal: Compare -> Viz/Presentation Method: Donut Chart -> Interaction: None -> Justification: Clearly shows the proportion of deals in each pipeline stage. Library/Method: Chart.js/Canvas. CONFIRMING: NO SVG/Mermaid.
+        - Sales Funnel -> Goal: Organize -> Viz/Presentation Method: Flow Chart -> Interaction: None -> Justification: Visualizes the process and provides context for the deal stages. Library/Method: HTML/CSS/Tailwind. CONFIRMING: NO SVG/Mermaid.
+        - Deal Ownership by Volume -> Goal: Organize/Rank -> Viz/Presentation Method: Ordered Bar Chart -> Interaction: None -> Justification: Ranks owners by the quantity of deals they manage. Library/Method: Chart.js/Canvas. CONFIRMING: NO SVG/Mermaid.
+        - MRR by Owner -> Goal: Compare -> Viz/Presentation Method: Pie Chart -> Interaction: None -> Justification: Shows the value contribution of each owner, creating a contrast to their deal volume. Library/Method: Chart.js/Canvas. CONFIRMING: NO SVG/Mermaid.
+        - MRR & Licenses by Stage -> Goal: Compare -> Viz/Presentation Method: Horizontal Bar Charts -> Interaction: None -> Justification: Pinpoints where monetary value and potential user base are concentrated in the pipeline. Library/Method: Chart.js/Canvas. CONFIRMING: NO SVG/Mermaid.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .kpi-value {
+            font-weight: 900;
+            font-size: 4rem;
+            line-height: 1;
+        }
+        .flowchart-step {
+            clip-path: polygon(0% 0%, 90% 0, 100% 50%, 90% 100%, 0% 100%);
+        }
+        .flowchart-arrow {
+            font-size: 2rem;
+            line-height: 1;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-[#073B4C]">
+
+    <div class="container mx-auto p-4 md:p-8">
+        
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-[#118AB2] mb-2">Hubspot Sales Pipeline Overview</h1>
+            <p class="text-lg text-gray-600">This infographic provides a visual analysis of the current deal landscape, highlighting key metrics and performance indicators to give a clear snapshot of pipeline health.</p>
+        </header>
+
+        <main class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+            <div class="md:col-span-1 lg:col-span-1 bg-white rounded-lg shadow-md p-6 flex flex-col justify-center items-center text-center">
+                <h2 class="text-xl font-bold text-[#073B4C] mb-2">Total Monthly Recurring Revenue</h2>
+                <p class="kpi-value text-[#06D6A0]">£35.8k</p>
+                <p class="text-gray-500 mt-2">This is the total potential MRR from all 13 active deals currently in the pipeline, representing the overall value we are tracking.</p>
+            </div>
+
+            <div class="md:col-span-1 lg:col-span-1 bg-white rounded-lg shadow-md p-6 flex flex-col justify-center items-center text-center">
+                <h2 class="text-xl font-bold text-[#073B4C] mb-2">Total Active Deals</h2>
+                <p class="kpi-value text-[#118AB2]">13</p>
+                <p class="text-gray-500 mt-2">This figure represents the total number of distinct opportunities that the sales team is actively pursuing across all stages of the funnel.</p>
+            </div>
+            
+            <div class="md:col-span-2 lg:col-span-1 bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-xl font-bold text-center mb-4">Deal Stage Distribution</h2>
+                <p class="text-center text-gray-500 mb-4 text-sm">This chart illustrates the proportion of deals at each stage of the sales funnel. The 'Scope' stage currently holds the highest number of deals, indicating a healthy number of opportunities in the later phases of evaluation.</p>
+                <div class="chart-container h-64 md:h-auto">
+                    <canvas id="dealStageChart"></canvas>
+                </div>
+            </div>
+
+            <div class="md:col-span-2 lg:col-span-3 bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-xl font-bold text-center mb-4">The Sales Pipeline Funnel</h2>
+                <p class="text-center text-gray-500 mb-6 text-sm">Our sales process is designed to guide opportunities from initial identification to final qualification. This flowchart outlines the key phases a deal progresses through, providing a framework for understanding where each opportunity stands.</p>
+                <div class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-2 text-white text-center">
+                    <div class="w-full md:w-1/5 h-20 flex items-center justify-center p-2 bg-[#118AB2] rounded-md flowchart-step"><strong>Find - No Contact</strong></div>
+                    <div class="text-[#118AB2] flowchart-arrow hidden md:block">&rarr;</div>
+                    <div class="w-full md:w-1/5 h-20 flex items-center justify-center p-2 bg-[#06D6A0] rounded-md flowchart-step"><strong>Discovery & Nurture</strong></div>
+                    <div class="text-[#06D6A0] flowchart-arrow hidden md:block">&rarr;</div>
+                    <div class="w-full md:w-1/5 h-20 flex items-center justify-center p-2 bg-[#FFD166] rounded-md flowchart-step"><strong>Validate & Scope</strong></div>
+                    <div class="text-[#FFD166] flowchart-arrow hidden md:block">&rarr;</div>
+                    <div class="w-full md:w-1/5 h-20 flex items-center justify-center p-2 bg-[#FF6B6B] rounded-md flowchart-step"><strong>Consensus & Qualification</strong></div>
+                </div>
+            </div>
+
+            <div class="md:col-span-1 lg:col-span-2 bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-xl font-bold text-center mb-4">Performance Deep Dive: Deal Ownership</h2>
+                <p class="text-center text-gray-500 mb-4 text-sm">Understanding how deals are distributed among owners is key to managing workload and performance. The charts below contrast the number of deals managed by each owner with the total value they contribute to the pipeline, revealing different performance profiles.</p>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-6">
+                    <div>
+                        <h3 class="font-semibold text-center mb-2">Deal Ownership by Volume</h3>
+                        <div class="chart-container h-80">
+                            <canvas id="dealOwnerVolumeChart"></canvas>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-center mb-2">MRR Contribution by Owner</h3>
+                        <div class="chart-container h-80">
+                            <canvas id="dealOwnerValueChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="md:col-span-1 lg:col-span-1 bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-xl font-bold text-center mb-4">Value Analysis by Deal Stage</h2>
+                <p class="text-center text-gray-500 mb-4 text-sm">This analysis pinpoints where value is concentrated within the sales funnel. A significant portion of the total MRR is in the 'Scope' stage, largely driven by a single high-value deal, highlighting its critical importance to the pipeline's overall health.</p>
+                <div class="chart-container h-80 md:h-96">
+                    <canvas id="mrrByStageChart"></canvas>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const dealData = {
+            stages: {
+                'Find - No Contact': { deals: 2, mrr: 2500, licenses: 425 },
+                'Discovery': { deals: 1, mrr: 0, licenses: 3 },
+                'Consensus': { deals: 2, mrr: 674, licenses: 13 },
+                'Validate': { deals: 1, mrr: 750, licenses: 5 },
+                'Good fit Nurture': { deals: 1, mrr: 0, licenses: 14 },
+                'Scope': { deals: 4, mrr: 28800, licenses: 1128 },
+                'Qualification': { deals: 2, mrr: 3098.50, licenses: 24 }
+            },
+            owners: {
+                'Stevie Gardiner': { deals: 1, mrr: 0 },
+                'Harris Tariq': { deals: 1, mrr: 0 },
+                'Heather Maxwell': { deals: 1, mrr: 2500 },
+                'Arab Ismail': { deals: 5, mrr: 5824 },
+                'Eli Sufrin': { deals: 2, mrr: 24400 },
+                'Serge Fagelman': { deals: 2, mrr: 3098.50 }
+            }
+        };
+
+        const palette = {
+            red: '#FF6B6B',
+            yellow: '#FFD166',
+            green: '#06D6A0',
+            blue: '#118AB2',
+            navy: '#073B4C',
+            lightBlue: '#A8DADC',
+            orange: '#F4A261'
+        };
+        const chartColors = [palette.blue, palette.green, palette.yellow, palette.red, palette.orange, palette.lightBlue, palette.navy];
+
+        function wrapLabel(str, maxWidth) {
+            if (str.length <= maxWidth) {
+                return str;
+            }
+            const words = str.split(' ');
+            let lines = [];
+            let currentLine = '';
+            words.forEach(word => {
+                if ((currentLine + word).length > maxWidth && currentLine.length > 0) {
+                    lines.push(currentLine.trim());
+                    currentLine = '';
+                }
+                currentLine += word + ' ';
+            });
+            lines.push(currentLine.trim());
+            return lines;
+        }
+
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+                return label.join(' ');
+            }
+            return label;
+        };
+        
+        const defaultChartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        font: {
+                            family: "'Inter', sans-serif"
+                        }
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        title: tooltipTitleCallback
+                    },
+                    bodyFont: {
+                        family: "'Inter', sans-serif"
+                    },
+                    titleFont: {
+                        family: "'Inter', sans-serif"
+                    }
+                }
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            new Chart(document.getElementById('dealStageChart'), {
+                type: 'doughnut',
+                data: {
+                    labels: Object.keys(dealData.stages).map(label => wrapLabel(label, 16)),
+                    datasets: [{
+                        label: 'Deals',
+                        data: Object.values(dealData.stages).map(s => s.deals),
+                        backgroundColor: chartColors,
+                        borderColor: '#fff',
+                        borderWidth: 2
+                    }]
+                },
+                options: { ...defaultChartOptions }
+            });
+
+            const ownerVolumeData = Object.entries(dealData.owners).map(([name, data]) => ({ name, deals: data.deals })).sort((a, b) => b.deals - a.deals);
+            new Chart(document.getElementById('dealOwnerVolumeChart'), {
+                type: 'bar',
+                data: {
+                    labels: ownerVolumeData.map(o => wrapLabel(o.name, 16)),
+                    datasets: [{
+                        label: 'Number of Deals',
+                        data: ownerVolumeData.map(o => o.deals),
+                        backgroundColor: palette.blue,
+                        borderColor: palette.navy,
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    ...defaultChartOptions,
+                    indexAxis: 'y',
+                    plugins: { ...defaultChartOptions.plugins, legend: { display: false } },
+                    scales: {
+                        x: { beginAtZero: true, ticks: { stepSize: 1 } }
+                    }
+                }
+            });
+
+            const ownerValueData = Object.entries(dealData.owners).map(([name, data]) => ({ name, mrr: data.mrr })).sort((a, b) => b.mrr - a.mrr);
+            new Chart(document.getElementById('dealOwnerValueChart'), {
+                type: 'pie',
+                data: {
+                    labels: ownerValueData.map(o => wrapLabel(o.name, 16)),
+                    datasets: [{
+                        label: 'MRR (£)',
+                        data: ownerValueData.map(o => o.mrr),
+                        backgroundColor: chartColors,
+                        borderColor: '#fff',
+                        borderWidth: 2
+                    }]
+                },
+                options: { ...defaultChartOptions }
+            });
+            
+            const mrrByStageData = Object.entries(dealData.stages).map(([name, data]) => ({ name, mrr: data.mrr })).sort((a, b) => b.mrr - a.mrr);
+            new Chart(document.getElementById('mrrByStageChart'), {
+                type: 'bar',
+                data: {
+                    labels: mrrByStageData.map(s => wrapLabel(s.name, 16)),
+                    datasets: [{
+                        label: 'MRR (£)',
+                        data: mrrByStageData.map(s => s.mrr),
+                        backgroundColor: palette.green
+                    }]
+                },
+                options: {
+                    ...defaultChartOptions,
+                    indexAxis: 'y',
+                    plugins: { ...defaultChartOptions.plugins, legend: { display: false } }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
