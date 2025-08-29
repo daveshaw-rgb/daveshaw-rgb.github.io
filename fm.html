@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UK Facilities Management Sector: A Comparative Overview</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F0F4F8;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 400px;
+            max-height: 50vh;
+        }
+        .kpi-card {
+            background-color: #ffffff;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .kpi-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .header-gradient {
+            background: linear-gradient(90deg, #FF6B6B, #FFD166);
+        }
+        .section-title {
+            color: #06D6A0;
+            font-weight: 900;
+            font-size: 2.25rem;
+            line-height: 2.5rem;
+        }
+        .card-title {
+            color: #118AB2;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body class="text-gray-700">
+
+    <header class="header-gradient p-8 text-white text-center rounded-b-3xl shadow-lg">
+        <h1 class="text-4xl md:text-5xl font-black tracking-tight">UK Facilities Management Sector</h1>
+        <p class="mt-4 text-lg md:text-xl font-light">A Comparative Overview of Key Players</p>
+    </header>
+
+    <main class="container mx-auto p-4 md:p-8">
+
+        <section id="introduction" class="mb-12 text-center">
+            <h2 class="section-title mb-4">At a Glance</h2>
+            <p class="max-w-4xl mx-auto text-lg">
+                The UK's facilities management (FM) landscape is diverse, featuring large multinational corporations and specialized regional firms. This infographic provides a snapshot of seven key companies, comparing their financial scale, workforce size, and operational focus to highlight the sector's dynamic nature. From comprehensive service providers to niche specialists, each company plays a unique role in maintaining the nation's infrastructure.
+            </p>
+        </section>
+
+        <section id="comparison-charts" class="mb-12">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="kpi-card">
+                    <h3 class="card-title text-xl mb-4 text-center">Company Turnover Comparison (£ Millions)</h3>
+                    <p class="text-center text-gray-500 mb-4">This chart visually compares the annual turnover of the selected FM companies, highlighting the significant financial differences between large-scale operators and more specialized firms.</p>
+                    <div class="chart-container h-96 md:h-[50vh]">
+                        <canvas id="turnoverChart"></canvas>
+                    </div>
+                </div>
+                <div class="kpi-card">
+                    <h3 class="card-title text-xl mb-4 text-center">Employee Count Comparison</h3>
+                    <p class="text-center text-gray-500 mb-4">Workforce size is a key indicator of a company's scale and operational capacity. This chart illustrates the vast range in employee numbers, from large groups with thousands of staff to smaller, specialized teams.</p>
+                    <div class="chart-container h-96 md:h-[50vh]">
+                        <canvas id="employeesChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="company-focus" class="mb-12">
+            <h2 class="section-title mb-8 text-center">Company Specializations & Contract Focus</h2>
+            <p class="max-w-4xl mx-auto text-lg text-center mb-8">
+                Beyond the numbers, each company has a distinct area of expertise and targets different types of contracts. The following breakdown illustrates the primary services and typical client profiles, showcasing the diverse specializations within the FM sector.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <div class="kpi-card">
+                    <h3 class="card-title text-lg">Pinnacle FM Limited</h3>
+                    <p class="mt-2 text-sm"><strong class="text-[#118AB2]">Services:</strong> Comprehensive Hard & Soft FM, Cleaning.</p>
+                    <p class="mt-1 text-sm"><strong class="text-[#118AB2]">Typical Contracts:</strong> Large-scale public sector (schools, universities) and private housing (460,000+ homes).</p>
+                </div>
+
+                <div class="kpi-card">
+                    <h3 class="card-title text-lg">NSS Maintenance</h3>
+                    <p class="mt-2 text-sm"><strong class="text-[#118AB2]">Services:</strong> Building Facade, Roof Maintenance, Glazing, Technical Cleaning.</p>
+                    <p class="mt-1 text-sm"><strong class="text-[#118AB2]">Typical Contracts:</strong> Specialized maintenance for commercial buildings using a self-delivered model.</p>
+                </div>
+
+                <div class="kpi-card">
+                    <h3 class="card-title text-lg">First Response Group Ltd</h3>
+                    <p class="mt-2 text-sm"><strong class="text-[#118AB2]">Services:</strong> Integrated Security & FM, Manned Guarding, Cleaning, Landscaping.</p>
+                    <p class="mt-1 text-sm"><strong class="text-[#118AB2]">Typical Contracts:</strong> Clients requiring a combined security and facilities solution, such as corporate and commercial sites.</p>
+                </div>
+
+                <div class="kpi-card">
+                    <h3 class="card-title text-lg">Sherwoods Ltd</h3>
+                    <p class="mt-2 text-sm"><strong class="text-[#118AB2]">Services:</strong> Planned Preventative Maintenance (PPM), M&E, HVAC.</p>
+                    <p class="mt-1 text-sm"><strong class="text-[#118AB2]">Typical Contracts:</strong> Regional specialist for commercial, industrial, and public sector clients in the South West UK.</p>
+                </div>
+
+                <div class="kpi-card">
+                    <h3 class="card-title text-lg">Rose Property Services</h3>
+                    <p class="mt-2 text-sm"><strong class="text-[#118AB2]">Services:</strong> FM Cleaning, Gardening, Window Cleaning.</p>
+                    <p class="mt-1 text-sm"><strong class="text-[#118AB2]">Typical Contracts:</strong> Niche provider for residential blocks of flats and large estates, working with property managers.</p>
+                </div>
+
+                <div class="kpi-card">
+                    <h3 class="card-title text-lg">DFP Services Ltd</h3>
+                    <p class="mt-2 text-sm"><strong class="text-[#118AB2]">Services:</strong> Building Compliance (Fire, Security), Plumbing, Heating, Renewables.</p>
+                    <p class="mt-1 text-sm"><strong class="text-[#118AB2]">Typical Contracts:</strong> Significant presence in the social housing sector with housing associations and councils.</p>
+                </div>
+                
+                 <div class="kpi-card">
+                    <h3 class="card-title text-lg">P.F.L. Electrical Ltd</h3>
+                    <p class="mt-2 text-sm"><strong class="text-[#118AB2]">Services:</strong> Electrical Installations, Kitchen/Bathroom Refurbishments, Heating.</p>
+                    <p class="mt-1 text-sm"><strong class="text-[#118AB2]">Typical Contracts:</strong> Specialized contractor for social housing and construction on new build and refurbishment projects.</p>
+                </div>
+
+            </div>
+        </section>
+        
+        <section id="turnover-vs-employees" class="mb-12">
+            <h2 class="section-title mb-8 text-center">Efficiency Snapshot: Turnover vs. Employees</h2>
+            <p class="max-w-4xl mx-auto text-lg text-center mb-8">
+                This bubble chart explores the relationship between a company's financial turnover and its workforce size. The size of each bubble represents the number of employees. This visualization helps to understand the different business models at play—some companies generate high turnover with a relatively smaller, specialized workforce, while others rely on a large employee base to deliver their services.
+            </p>
+            <div class="kpi-card">
+                <div class="chart-container h-[60vh] max-h-[500px]">
+                    <canvas id="turnoverVsEmployeesChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-gray-800 text-white p-6 text-center mt-12 rounded-t-3xl">
+        <p>&copy; 2025 FM Sector Analysis. All data is based on publicly available information as of August 2025.</p>
+    </footer>
+
+    <script>
+        const companyData = [
+            { name: 'Pinnacle FM Limited', turnover: 72.93, employees: 3000 },
+            { name: 'NSS Maintenance', turnover: 25.84, employees: 208 },
+            { name: 'First Response Group Ltd', turnover: 55.28, employees: 695 },
+            { name: 'Sherwoods Ltd', turnover: 13.10, employees: 128 },
+            { name: 'Rose Property Services', turnover: 0.68, employees: 137 },
+            { name: 'DFP Services Ltd', turnover: 73.00, employees: 100 },
+            { name: 'P.F.L. Electrical Ltd', turnover: 0.28, employees: 18 }
+        ];
+
+        const palette = {
+            red: '#FF6B6B',
+            yellow: '#FFD166',
+            green: '#06D6A0',
+            blue: '#118AB2',
+            navy: '#073B4C',
+            lightBlue: '#A8DADC',
+            lightGray: '#F0F4F8'
+        };
+        
+        const chartColors = [palette.red, palette.yellow, palette.green, palette.blue, palette.lightBlue, palette.navy, '#EF476F'];
+
+        function wrapLabel(str, maxWidth) {
+            if (str.length <= maxWidth) {
+                return str;
+            }
+            const words = str.split(' ');
+            const lines = [];
+            let currentLine = '';
+            for (const word of words) {
+                if ((currentLine + word).length > maxWidth) {
+                    lines.push(currentLine.trim());
+                    currentLine = '';
+                }
+                currentLine += word + ' ';
+            }
+            lines.push(currentLine.trim());
+            return lines;
+        }
+        
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+                return label.join(' ');
+            }
+            return label;
+        };
+
+        const turnoverCtx = document.getElementById('turnoverChart').getContext('2d');
+        new Chart(turnoverCtx, {
+            type: 'bar',
+            data: {
+                labels: companyData.map(c => wrapLabel(c.name, 16)),
+                datasets: [{
+                    label: 'Turnover (£M)',
+                    data: companyData.map(c => c.turnover),
+                    backgroundColor: chartColors,
+                    borderColor: chartColors.map(c => c + 'B3'),
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                responsive: true,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: { callbacks: { title: tooltipTitleCallback } }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: { display: true, text: 'Turnover in £ Millions' }
+                    }
+                }
+            }
+        });
+
+        const employeesCtx = document.getElementById('employeesChart').getContext('2d');
+        new Chart(employeesCtx, {
+            type: 'bar',
+            data: {
+                labels: companyData.map(c => wrapLabel(c.name, 16)),
+                datasets: [{
+                    label: 'Number of Employees',
+                    data: companyData.map(c => c.employees),
+                    backgroundColor: chartColors.slice().reverse(),
+                    borderColor: chartColors.slice().reverse().map(c => c + 'B3'),
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                responsive: true,
+                indexAxis: 'y',
+                plugins: {
+                    legend: { display: false },
+                    tooltip: { callbacks: { title: tooltipTitleCallback } }
+                },
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        title: { display: true, text: 'Number of Employees' }
+                    }
+                }
+            }
+        });
+        
+        const turnoverVsEmployeesCtx = document.getElementById('turnoverVsEmployeesChart').getContext('2d');
+        new Chart(turnoverVsEmployeesCtx, {
+            type: 'bubble',
+            data: {
+                datasets: companyData.map((c, index) => ({
+                    label: c.name,
+                    data: [{
+                        x: c.turnover,
+                        y: c.employees,
+                        r: Math.max(5, Math.sqrt(c.employees) / 2)
+                    }],
+                    backgroundColor: chartColors[index] + 'BF',
+                    borderColor: chartColors[index],
+                    borderWidth: 2
+                }))
+            },
+            options: {
+                maintainAspectRatio: false,
+                responsive: true,
+                plugins: {
+                    legend: { 
+                        position: 'bottom',
+                        labels: {
+                            boxWidth: 20
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const company = companyData.find(c => c.name === context.dataset.label);
+                                return [
+                                    `${company.name}`,
+                                    `Turnover: £${company.turnover.toFixed(2)}M`,
+                                    `Employees: ${company.employees}`
+                                ];
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Annual Turnover (£ Millions)'
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        type: 'logarithmic',
+                        title: {
+                            display: true,
+                            text: 'Number of Employees (Log Scale)'
+                        }
+                    }
+                }
+            }
+        });
+
+    </script>
+</body>
+</html>
