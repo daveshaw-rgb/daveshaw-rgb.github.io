@@ -3,26 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hubspot Deal Analysis Infographic</title>
+    <title>Pre-Sales Pipeline Infographic</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
-    <!-- Chosen Palette: Energetic & Playful -->
-    <!-- Application Structure Plan: The infographic tells a story starting with high-level KPIs (Total MRR, Total Deals) to hook the user. It then moves to a compositional view of the pipeline with a 'Deal Stage Distribution' donut chart. A flowchart visualizes the sales process itself. The narrative then deepens into performance analysis, comparing deal owners by volume and value. Finally, it provides an in-depth value analysis, breaking down MRR and license counts by stage. This top-down structure (from summary to detail) is chosen for its logical flow and ease of understanding for a business audience. -->
-    <!-- Visualization & Content Choices: 
-        - Total MRR/Deals -> Goal: Inform -> Viz/Presentation Method: Single Big Number -> Interaction: None -> Justification: Provides immediate, high-impact KPIs. Library/Method: HTML/CSS. CONFIRMING: NO SVG/Mermaid.
-        - Deal Stage Distribution -> Goal: Compare -> Viz/Presentation Method: Donut Chart -> Interaction: None -> Justification: Clearly shows the proportion of deals in each pipeline stage. Library/Method: Chart.js/Canvas. CONFIRMING: NO SVG/Mermaid.
-        - Sales Funnel -> Goal: Organize -> Viz/Presentation Method: Flow Chart -> Interaction: None -> Justification: Visualizes the process and provides context for the deal stages. Library/Method: HTML/CSS/Tailwind. CONFIRMING: NO SVG/Mermaid.
-        - Deal Ownership by Volume -> Goal: Organize/Rank -> Viz/Presentation Method: Ordered Bar Chart -> Interaction: None -> Justification: Ranks owners by the quantity of deals they manage. Library/Method: Chart.js/Canvas. CONFIRMING: NO SVG/Mermaid.
-        - MRR by Owner -> Goal: Compare -> Viz/Presentation Method: Pie Chart -> Interaction: None -> Justification: Shows the value contribution of each owner, creating a contrast to their deal volume. Library/Method: Chart.js/Canvas. CONFIRMING: NO SVG/Mermaid.
-        - MRR & Licenses by Stage -> Goal: Compare -> Viz/Presentation Method: Horizontal Bar Charts -> Interaction: None -> Justification: Pinpoints where monetary value and potential user base are concentrated in the pipeline. Library/Method: Chart.js/Canvas. CONFIRMING: NO SVG/Mermaid.
-    -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Inter', sans-serif;
+            background-color: #F0F4F8; 
         }
         .chart-container {
             position: relative;
@@ -30,7 +20,7 @@
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
-            height: 300px;
+            height: 320px;
             max-height: 400px;
         }
         @media (min-width: 768px) {
@@ -38,143 +28,137 @@
                 height: 350px;
             }
         }
-        .kpi-value {
-            font-weight: 900;
-            font-size: 4rem;
-            line-height: 1;
-        }
-        .flowchart-step {
-            clip-path: polygon(0% 0%, 90% 0, 100% 50%, 90% 100%, 0% 100%);
-        }
-        .flowchart-arrow {
-            font-size: 2rem;
-            line-height: 1;
-        }
     </style>
 </head>
-<body class="bg-gray-100 text-[#073B4C]">
+<body class="text-gray-800">
 
-    <div class="container mx-auto p-4 md:p-8">
-        
+    <div class="container mx-auto p-4 md:p-8 max-w-6xl">
+
         <header class="text-center mb-12">
-            <h1 class="text-4xl md:text-5xl font-bold text-[#118AB2] mb-2">Hubspot Sales Pipeline Overview</h1>
-            <p class="text-lg text-gray-600">This infographic provides a visual analysis of the current deal landscape, highlighting key metrics and performance indicators to give a clear snapshot of pipeline health.</p>
+            <h1 class="text-4xl md:text-5xl font-bold text-[#003F5C]">Pre-Sales Pipeline Overview</h1>
+            <p class="text-lg text-[#58508D] mt-2">A visual analysis of the current pre-sales deals not yet closed.</p>
         </header>
-
-        <main class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-
-            <div class="md:col-span-1 lg:col-span-1 bg-white rounded-lg shadow-md p-6 flex flex-col justify-center items-center text-center">
-                <h2 class="text-xl font-bold text-[#073B4C] mb-2">Total Monthly Recurring Revenue</h2>
-                <p class="kpi-value text-[#06D6A0]">£35.8k</p>
-                <p class="text-gray-500 mt-2">This is the total potential MRR from all 13 active deals currently in the pipeline, representing the overall value we are tracking.</p>
+        
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-12">
+            <div class="bg-white rounded-lg shadow-md p-6 text-center">
+                <h2 class="text-lg font-semibold text-[#58508D] mb-2">Total Deals</h2>
+                <p class="text-5xl font-bold text-[#003F5C]">9</p>
+                <p class="text-sm text-gray-500 mt-2">Currently in the pipeline</p>
             </div>
-
-            <div class="md:col-span-1 lg:col-span-1 bg-white rounded-lg shadow-md p-6 flex flex-col justify-center items-center text-center">
-                <h2 class="text-xl font-bold text-[#073B4C] mb-2">Total Active Deals</h2>
-                <p class="kpi-value text-[#118AB2]">13</p>
-                <p class="text-gray-500 mt-2">This figure represents the total number of distinct opportunities that the sales team is actively pursuing across all stages of the funnel.</p>
+            <div class="bg-white rounded-lg shadow-md p-6 text-center">
+                <h2 class="text-lg font-semibold text-[#58508D] mb-2">Total Monthly Recurring Revenue</h2>
+                <p class="text-5xl font-bold text-[#003F5C]">£35,154</p>
+                 <p class="text-sm text-gray-500 mt-2">Potential MRR from all deals</p>
             </div>
-            
-            <div class="md:col-span-2 lg:col-span-1 bg-white rounded-lg shadow-md p-6">
-                <h2 class="text-xl font-bold text-center mb-4">Deal Stage Distribution</h2>
-                <p class="text-center text-gray-500 mb-4 text-sm">This chart illustrates the proportion of deals at each stage of the sales funnel. The 'Scope' stage currently holds the highest number of deals, indicating a healthy number of opportunities in the later phases of evaluation.</p>
-                <div class="chart-container h-64 md:h-auto">
+            <div class="bg-white rounded-lg shadow-md p-6 text-center">
+                <h2 class="text-lg font-semibold text-[#58508D] mb-2">Total Licenses</h2>
+                <p class="text-5xl font-bold text-[#003F5C]">1,217</p>
+                <p class="text-sm text-gray-500 mt-2">Across all potential deals</p>
+            </div>
+        </section>
+
+        <main class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h3 class="text-2xl font-bold text-[#003F5C] mb-4 text-center">Deal Stage Distribution</h3>
+                <p class="text-center text-gray-600 mb-6">This chart shows how the 9 open deals are distributed across the various stages of the sales pipeline. The 'Scope' stage currently holds the most deals, indicating a healthy number of qualified opportunities being actively worked on.</p>
+                <div class="chart-container">
                     <canvas id="dealStageChart"></canvas>
                 </div>
             </div>
 
-            <div class="md:col-span-2 lg:col-span-3 bg-white rounded-lg shadow-md p-6">
-                <h2 class="text-xl font-bold text-center mb-4">The Sales Pipeline Funnel</h2>
-                <p class="text-center text-gray-500 mb-6 text-sm">Our sales process is designed to guide opportunities from initial identification to final qualification. This flowchart outlines the key phases a deal progresses through, providing a framework for understanding where each opportunity stands.</p>
-                <div class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-2 text-white text-center">
-                    <div class="w-full md:w-1/5 h-20 flex items-center justify-center p-2 bg-[#118AB2] rounded-md flowchart-step"><strong>Find - No Contact</strong></div>
-                    <div class="text-[#118AB2] flowchart-arrow hidden md:block">&rarr;</div>
-                    <div class="w-full md:w-1/5 h-20 flex items-center justify-center p-2 bg-[#06D6A0] rounded-md flowchart-step"><strong>Discovery & Nurture</strong></div>
-                    <div class="text-[#06D6A0] flowchart-arrow hidden md:block">&rarr;</div>
-                    <div class="w-full md:w-1/5 h-20 flex items-center justify-center p-2 bg-[#FFD166] rounded-md flowchart-step"><strong>Validate & Scope</strong></div>
-                    <div class="text-[#FFD166] flowchart-arrow hidden md:block">&rarr;</div>
-                    <div class="w-full md:w-1/5 h-20 flex items-center justify-center p-2 bg-[#FF6B6B] rounded-md flowchart-step"><strong>Consensus & Qualification</strong></div>
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h3 class="text-2xl font-bold text-[#003F5C] mb-4 text-center">Deal Ownership</h3>
+                <p class="text-center text-gray-600 mb-6">This visualization breaks down the number of deals managed by each deal owner. Arab Ismail is currently leading with the highest number of assigned deals, followed by Serge Fagelman and Eli Sufrin.</p>
+                <div class="chart-container">
+                    <canvas id="dealOwnerChart"></canvas>
                 </div>
             </div>
 
-            <div class="md:col-span-1 lg:col-span-2 bg-white rounded-lg shadow-md p-6">
-                <h2 class="text-xl font-bold text-center mb-4">Performance Deep Dive: Deal Ownership</h2>
-                <p class="text-center text-gray-500 mb-4 text-sm">Understanding how deals are distributed among owners is key to managing workload and performance. The charts below contrast the number of deals managed by each owner with the total value they contribute to the pipeline, revealing different performance profiles.</p>
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-6">
-                    <div>
-                        <h3 class="font-semibold text-center mb-2">Deal Ownership by Volume</h3>
-                        <div class="chart-container h-80">
-                            <canvas id="dealOwnerVolumeChart"></canvas>
-                        </div>
-                    </div>
-                    <div>
-                        <h3 class="font-semibold text-center mb-2">MRR Contribution by Owner</h3>
-                        <div class="chart-container h-80">
-                            <canvas id="dealOwnerValueChart"></canvas>
-                        </div>
-                    </div>
+            <div class="md:col-span-2 bg-white rounded-lg shadow-md p-6">
+                <h3 class="text-2xl font-bold text-[#003F5C] mb-4 text-center">MRR by Deal</h3>
+                <p class="text-center text-gray-600 mb-6 max-w-3xl mx-auto">This bar chart compares the Monthly Recurring Revenue (MRR) for each individual deal. It clearly highlights the significant value of the 'Lanes Group - Depot Networks' deal, which represents the largest revenue opportunity in the current pipeline.</p>
+                <div class="chart-container h-96 max-h-[500px]">
+                    <canvas id="mrrByDealChart"></canvas>
                 </div>
             </div>
 
-            <div class="md:col-span-1 lg:col-span-1 bg-white rounded-lg shadow-md p-6">
-                <h2 class="text-xl font-bold text-center mb-4">Value Analysis by Deal Stage</h2>
-                <p class="text-center text-gray-500 mb-4 text-sm">This analysis pinpoints where value is concentrated within the sales funnel. A significant portion of the total MRR is in the 'Scope' stage, largely driven by a single high-value deal, highlighting its critical importance to the pipeline's overall health.</p>
-                <div class="chart-container h-80 md:h-96">
-                    <canvas id="mrrByStageChart"></canvas>
+            <div class="md:col-span-2 bg-white rounded-lg shadow-md p-6">
+                <h3 class="text-2xl font-bold text-[#003F5C] mb-4 text-center">Licenses vs. MRR</h3>
+                 <p class="text-center text-gray-600 mb-6 max-w-3xl mx-auto">The bubble chart below explores the relationship between the number of licenses and the MRR for each deal. The size of each bubble represents the MRR value. This view helps identify high-value deals relative to their size, such as 'Lanes Group' with both high licenses and high MRR.</p>
+                <div class="chart-container h-96 max-h-[500px]">
+                    <canvas id="licensesVsMrrChart"></canvas>
                 </div>
+            </div>
+
+            <div class="md:col-span-2 bg-white rounded-lg shadow-md p-6">
+                <h3 class="text-2xl font-bold text-[#003F5C] mb-4 text-center">Individual Deal Summaries</h3>
+                <p class="text-center text-gray-600 mb-6 max-w-3xl mx-auto">Here is a detailed summary for each deal in the pipeline, with deals that have an MRR below £1,000 highlighted for quick review.</p>
+                <ul class="list-none space-y-4">
+                    <li class="bg-yellow-100 border-l-4 border-yellow-500 rounded-lg p-4">
+                        <p class="font-semibold text-lg">Cap Waste Ltd</p>
+                        <p class="text-sm text-gray-700">This deal is in the **Consensus** stage and is owned by Arab Ismail. It has 12 licenses with an MRR of **£674.00**, which is below the £1,000 threshold.</p>
+                    </li>
+                    <li class="rounded-lg p-4">
+                        <p class="font-semibold text-lg">sph plant ltd</p>
+                        <p class="text-sm text-gray-700">This deal is in the **Good fit Nurture** stage, owned by Arab Ismail, and has 14 licenses. The MRR is currently not available.</p>
+                    </li>
+                    <li class="bg-yellow-100 border-l-4 border-yellow-500 rounded-lg p-4">
+                        <p class="font-semibold text-lg">Always Cleansing Ltd</p>
+                        <p class="text-sm text-gray-700">This deal is in the **Scope** stage, owned by Arab Ismail. It has 11 licenses with an MRR of **£900.00**, which is below the £1,000 threshold.</p>
+                    </li>
+                    <li class="rounded-lg p-4">
+                        <p class="font-semibold text-lg">Ward Security Ltd</p>
+                        <p class="text-sm text-gray-700">This deal is in the **Scope** stage, owned by Arab Ismail. It has 40 licenses with a substantial MRR of **£3,500.00**.</p>
+                    </li>
+                    <li class="rounded-lg p-4">
+                        <p class="font-semibold text-lg">Lanes Group - Depot Networks</p>
+                        <p class="text-sm text-gray-700">This high-value deal is in the **Scope** stage, owned by Eli Sufrin. It represents the largest opportunity with 1,000 licenses and an MRR of **£20,000.00**.</p>
+                    </li>
+                    <li class="rounded-lg p-4">
+                        <p class="font-semibold text-lg">Malcolm Hughes Land Surveyors</p>
+                        <p class="text-sm text-gray-700">This deal, owned by Eli Sufrin, is in the **Scope** stage. It has 77 licenses with an MRR of **£4,400.00**.</p>
+                    </li>
+                    <li class="rounded-lg p-4">
+                        <p class="font-semibold text-lg">Retrofit Scotland Ltd</p>
+                        <p class="text-sm text-gray-700">Owned by Serge Fagelman, this deal is in the **Qualification** stage. It has 19 licenses and an MRR of **£2,598.50**.</p>
+                    </li>
+                    <li class="bg-yellow-100 border-l-4 border-yellow-500 rounded-lg p-4">
+                        <p class="font-semibold text-lg">assetcool</p>
+                        <p class="text-sm text-gray-700">This deal is in the **Qualification** stage, owned by Serge Fagelman. It has 5 licenses with an MRR of **£500.00**, which is below the £1,000 threshold.</p>
+                    </li>
+                    <li class="rounded-lg p-4">
+                        <p class="font-semibold text-lg">BBSM Ltd</p>
+                        <p class="text-sm text-gray-700">This deal is in the **Consensus** stage and is owned by Serge Fagelman. It has 30 licenses with an MRR of **£2,581.55**.</p>
+                    </li>
+                </ul>
             </div>
         </main>
+        
+        <footer class="text-center mt-12 py-4">
+            <p class="text-sm text-gray-500">Data sourced from HubSpot CRM Export | Report generated on August 29, 2025</p>
+        </footer>
+
     </div>
 
     <script>
-        const dealData = {
-            stages: {
-                'Find - No Contact': { deals: 2, mrr: 2500, licenses: 425 },
-                'Discovery': { deals: 1, mrr: 0, licenses: 3 },
-                'Consensus': { deals: 2, mrr: 674, licenses: 13 },
-                'Validate': { deals: 1, mrr: 750, licenses: 5 },
-                'Good fit Nurture': { deals: 1, mrr: 0, licenses: 14 },
-                'Scope': { deals: 4, mrr: 28800, licenses: 1128 },
-                'Qualification': { deals: 2, mrr: 3098.50, licenses: 24 }
-            },
-            owners: {
-                'Stevie Gardiner': { deals: 1, mrr: 0 },
-                'Harris Tariq': { deals: 1, mrr: 0 },
-                'Heather Maxwell': { deals: 1, mrr: 2500 },
-                'Arab Ismail': { deals: 5, mrr: 5824 },
-                'Eli Sufrin': { deals: 2, mrr: 24400 },
-                'Serge Fagelman': { deals: 2, mrr: 3098.50 }
+        const wrapLabel = (label, maxLength = 16) => {
+            if (label.length <= maxLength) {
+                return label;
             }
-        };
-
-        const palette = {
-            red: '#FF6B6B',
-            yellow: '#FFD166',
-            green: '#06D6A0',
-            blue: '#118AB2',
-            navy: '#073B4C',
-            lightBlue: '#A8DADC',
-            orange: '#F4A261'
-        };
-        const chartColors = [palette.blue, palette.green, palette.yellow, palette.red, palette.orange, palette.lightBlue, palette.navy];
-
-        function wrapLabel(str, maxWidth) {
-            if (str.length <= maxWidth) {
-                return str;
-            }
-            const words = str.split(' ');
-            let lines = [];
+            const words = label.split(' ');
+            const lines = [];
             let currentLine = '';
-            words.forEach(word => {
-                if ((currentLine + word).length > maxWidth && currentLine.length > 0) {
+            for (const word of words) {
+                if ((currentLine + word).length > maxLength && currentLine.length > 0) {
                     lines.push(currentLine.trim());
                     currentLine = '';
                 }
                 currentLine += word + ' ';
-            });
+            }
             lines.push(currentLine.trim());
             return lines;
-        }
+        };
 
         const tooltipTitleCallback = (tooltipItems) => {
             const item = tooltipItems[0];
@@ -185,106 +169,197 @@
             return label;
         };
         
-        const defaultChartOptions = {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    position: 'bottom',
-                    labels: {
-                        font: {
-                            family: "'Inter', sans-serif"
+        const brilliantBluesPalette = {
+            background: '#F0F4F8',
+            darkBlue: '#003F5C',
+            purple: '#58508D',
+            pink: '#BC5090',
+            orange: '#FF6361',
+            yellow: '#FFA600'
+        };
+
+        const chartColors = [
+            brilliantBluesPalette.purple,
+            brilliantBluesPalette.pink,
+            brilliantBluesPalette.orange,
+            brilliantBluesPalette.yellow,
+            brilliantBluesPalette.darkBlue
+        ];
+
+        const dealStageCtx = document.getElementById('dealStageChart').getContext('2d');
+        new Chart(dealStageCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Scope', 'Consensus', 'Qualification', 'Good fit Nurture'],
+                datasets: [{
+                    label: 'Number of Deals',
+                    data: [4, 2, 2, 1],
+                    backgroundColor: chartColors,
+                    borderColor: '#FFFFFF',
+                    borderWidth: 3
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                    },
+                    tooltip: {
+                        callbacks: {
+                           title: tooltipTitleCallback
                         }
-                    }
-                },
-                tooltip: {
-                    callbacks: {
-                        title: tooltipTitleCallback
-                    },
-                    bodyFont: {
-                        family: "'Inter', sans-serif"
-                    },
-                    titleFont: {
-                        family: "'Inter', sans-serif"
                     }
                 }
             }
-        };
+        });
 
-        document.addEventListener('DOMContentLoaded', () => {
-            
-            new Chart(document.getElementById('dealStageChart'), {
-                type: 'doughnut',
-                data: {
-                    labels: Object.keys(dealData.stages).map(label => wrapLabel(label, 16)),
-                    datasets: [{
-                        label: 'Deals',
-                        data: Object.values(dealData.stages).map(s => s.deals),
-                        backgroundColor: chartColors,
-                        borderColor: '#fff',
-                        borderWidth: 2
-                    }]
-                },
-                options: { ...defaultChartOptions }
-            });
-
-            const ownerVolumeData = Object.entries(dealData.owners).map(([name, data]) => ({ name, deals: data.deals })).sort((a, b) => b.deals - a.deals);
-            new Chart(document.getElementById('dealOwnerVolumeChart'), {
-                type: 'bar',
-                data: {
-                    labels: ownerVolumeData.map(o => wrapLabel(o.name, 16)),
-                    datasets: [{
-                        label: 'Number of Deals',
-                        data: ownerVolumeData.map(o => o.deals),
-                        backgroundColor: palette.blue,
-                        borderColor: palette.navy,
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    ...defaultChartOptions,
-                    indexAxis: 'y',
-                    plugins: { ...defaultChartOptions.plugins, legend: { display: false } },
-                    scales: {
-                        x: { beginAtZero: true, ticks: { stepSize: 1 } }
+        const dealOwnerCtx = document.getElementById('dealOwnerChart').getContext('2d');
+        new Chart(dealOwnerCtx, {
+            type: 'pie',
+            data: {
+                labels: ['Arab Ismail', 'Serge Fagelman', 'Eli Sufrin'],
+                datasets: [{
+                    label: 'Number of Deals',
+                    data: [4, 3, 2],
+                    backgroundColor: chartColors,
+                    borderColor: '#FFFFFF',
+                    borderWidth: 3
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                    },
+                    tooltip: {
+                        callbacks: {
+                            title: tooltipTitleCallback
+                        }
                     }
                 }
-            });
-
-            const ownerValueData = Object.entries(dealData.owners).map(([name, data]) => ({ name, mrr: data.mrr })).sort((a, b) => b.mrr - a.mrr);
-            new Chart(document.getElementById('dealOwnerValueChart'), {
-                type: 'pie',
-                data: {
-                    labels: ownerValueData.map(o => wrapLabel(o.name, 16)),
-                    datasets: [{
-                        label: 'MRR (£)',
-                        data: ownerValueData.map(o => o.mrr),
-                        backgroundColor: chartColors,
-                        borderColor: '#fff',
-                        borderWidth: 2
-                    }]
-                },
-                options: { ...defaultChartOptions }
-            });
-            
-            const mrrByStageData = Object.entries(dealData.stages).map(([name, data]) => ({ name, mrr: data.mrr })).sort((a, b) => b.mrr - a.mrr);
-            new Chart(document.getElementById('mrrByStageChart'), {
-                type: 'bar',
-                data: {
-                    labels: mrrByStageData.map(s => wrapLabel(s.name, 16)),
-                    datasets: [{
-                        label: 'MRR (£)',
-                        data: mrrByStageData.map(s => s.mrr),
-                        backgroundColor: palette.green
-                    }]
-                },
-                options: {
-                    ...defaultChartOptions,
-                    indexAxis: 'y',
-                    plugins: { ...defaultChartOptions.plugins, legend: { display: false } }
-                }
-            });
+            }
         });
+        
+        const mrrByDealLabels = [
+            'Lanes Group - Depot Networks', 'Malcolm Hughes Land Surveyors', 'Ward Security Ltd', 
+            'BBSM Ltd', 'Retrofit Scotland Ltd', 'Always Cleansing Ltd', 'Cap Waste Ltd', 'assetcool'
+        ].map(label => wrapLabel(label));
+
+        const mrrByDealCtx = document.getElementById('mrrByDealChart').getContext('2d');
+        new Chart(mrrByDealCtx, {
+            type: 'bar',
+            data: {
+                labels: mrrByDealLabels,
+                datasets: [{
+                    label: 'MRR (£)',
+                    data: [20000, 4400, 3500, 2581.55, 2598.50, 900, 674, 500],
+                    backgroundColor: brilliantBluesPalette.purple,
+                    borderColor: brilliantBluesPalette.darkBlue,
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Monthly Recurring Revenue (£)'
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            title: tooltipTitleCallback
+                        }
+                    }
+                }
+            }
+        });
+
+        const licensesVsMrrCtx = document.getElementById('licensesVsMrrChart').getContext('2d');
+        new Chart(licensesVsMrrCtx, {
+            type: 'bubble',
+            data: {
+                datasets: [{
+                    label: 'Lanes Group - Depot Networks',
+                    data: [{ x: 1000, y: 20000, r: 40 }],
+                    backgroundColor: brilliantBluesPalette.darkBlue
+                }, {
+                    label: 'Malcolm Hughes Land Surveyors',
+                    data: [{ x: 77, y: 4400, r: 20 }],
+                    backgroundColor: brilliantBluesPalette.purple
+                }, {
+                    label: 'Ward Security Ltd',
+                    data: [{ x: 40, y: 3500, r: 18 }],
+                    backgroundColor: brilliantBluesPalette.pink
+                }, {
+                    label: 'BBSM Ltd',
+                    data: [{ x: 30, y: 2581.55, r: 15 }],
+                    backgroundColor: brilliantBluesPalette.orange
+                }, {
+                    label: 'Retrofit Scotland Ltd',
+                    data: [{ x: 19, y: 2598.50, r: 15 }],
+                     backgroundColor: brilliantBluesPalette.yellow
+                },{
+                    label: 'Always Cleansing Ltd',
+                    data: [{ x: 11, y: 900, r: 10 }],
+                    backgroundColor: '#6B8E23'
+                },{
+                    label: 'Cap Waste Ltd',
+                    data: [{ x: 12, y: 674, r: 9 }],
+                    backgroundColor: '#4682B4'
+                },{
+                    label: 'assetcool',
+                    data: [{ x: 5, y: 500, r: 8 }],
+                    backgroundColor: '#D2691E'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Total Number of Licenses'
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'MRR (£)'
+                        }
+                    }
+                },
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const label = context.dataset.label || '';
+                                if (label) {
+                                    return `${label}: (${context.parsed.x} licenses, £${context.parsed.y} MRR)`;
+                                }
+                                return false;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
     </script>
 </body>
 </html>
+```
