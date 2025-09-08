@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Euro Energy Group - POC Plan Infographic</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F0F2F5;
+        }
+        .flowchart-line {
+            width: 2px;
+            background-color: #D45087;
+            height: 3rem;
+            margin: auto;
+        }
+        .flowchart-arrow::after {
+            content: '▼';
+            color: #D45087;
+            font-size: 1.5rem;
+            line-height: 1;
+        }
+        .kpi-card {
+            background-color: white;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .kpi-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <div class="container mx-auto p-4 md:p-8 max-w-7xl">
+        <!-- Header -->
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-[#003F5C] tracking-tight">Proof of Concept: A New Workflow for Euro Energy</h1>
+            <p class="mt-4 text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">Visualizing the transformation from a fragmented, multi-system process to a single, unified, and efficient operational platform.</p>
+        </header>
+
+        <!-- Section 1: The Challenge -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-center text-[#2F4B7C] mb-8">The Current Challenge: A Disconnected Workflow</h2>
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <p class="text-center text-gray-700 mb-8">Euro Energy's operations are spread across multiple platforms, leading to manual data transfer, communication delays, and compliance risks. This fragmented approach creates inefficiencies that hinder scalability.</p>
+                <div class="flex flex-col items-center">
+                    <div class="flow-item bg-gray-100 p-4 rounded-lg shadow text-center w-full max-w-sm">
+                        <h3 class="font-bold text-[#665191]">1. Job Inception</h3>
+                        <p class="text-sm">Data entered into "Installer" CRM</p>
+                    </div>
+                    <div class="flowchart-line"></div>
+                    <div class="flowchart-arrow"></div>
+                    <div class="flowchart-line"></div>
+                    <div class="flow-item bg-gray-100 p-4 rounded-lg shadow text-center w-full max-w-sm">
+                        <h3 class="font-bold text-[#665191]">2. Scheduling</h3>
+                        <p class="text-sm">Appointments manually booked in Google Calendar</p>
+                    </div>
+                    <div class="flowchart-line"></div>
+                    <div class="flowchart-arrow"></div>
+                    <div class="flowchart-line"></div>
+                    <div class="flow-item bg-gray-100 p-4 rounded-lg shadow text-center w-full max-w-sm">
+                        <h3 class="font-bold text-[#665191]">3. On-Site Communication</h3>
+                        <p class="text-sm">Photos & updates shared in WhatsApp groups</p>
+                    </div>
+                    <div class="flowchart-line"></div>
+                    <div class="flowchart-arrow"></div>
+                    <div class="flowchart-line"></div>
+                     <div class="flow-item bg-gray-100 p-4 rounded-lg shadow text-center w-full max-w-sm">
+                        <h3 class="font-bold text-[#665191]">4. Compliance & Submission</h3>
+                        <p class="text-sm">Photos manually downloaded, renamed, and packaged</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Measuring Success -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-center text-[#2F4B7C] mb-8">Measuring Success: Quantifiable POC Goals</h2>
+            <p class="text-center text-gray-700 mb-10 max-w-3xl mx-auto">This POC is designed to achieve specific, measurable improvements across key operational areas. The success of this initiative will be evaluated against five core criteria that directly address Euro Energy's primary pain points.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <div class="kpi-card lg:col-span-1">
+                    <h3 class="text-xl font-bold text-[#665191] mb-2">1. Reduce Photo Processing Time</h3>
+                    <p class="text-gray-600 mb-4">By automating photo capture, time-stamping, and document packaging, we aim to cut the manual effort required from the submissions team by at least 50%.</p>
+                    <div class="chart-container">
+                        <canvas id="photoProcessingChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="kpi-card lg:col-span-2">
+                    <h3 class="text-xl font-bold text-[#A05195] mb-2">2. Achieve Real-Time Visibility</h3>
+                    <p class="text-gray-600 mb-4">Replace delayed, chaotic communication with instant, auditable digital workflows. The "permission to board/plaster" process becomes a seamless, real-time approval cycle within a single system.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+                        <div class="p-4 bg-red-50 rounded-lg border border-red-200">
+                            <h4 class="font-semibold text-red-800">Before: Manual & Delayed</h4>
+                            <ul class="list-disc list-inside text-sm text-red-700 mt-2 space-y-1">
+                                <li>Field team waits for WhatsApp replies.</li>
+                                <li>Office team inundated with notifications.</li>
+                                <li>No clear audit trail of approvals.</li>
+                                <li>High risk of missed messages and delays.</li>
+                            </ul>
+                        </div>
+                         <div class="p-4 bg-green-50 rounded-lg border border-green-200">
+                            <h4 class="font-semibold text-green-800">After: Automated & Instant</h4>
+                            <ul class="list-disc list-inside text-sm text-green-700 mt-2 space-y-1">
+                                <li>Digital request submitted on-site.</li>
+                                <li>Instant, targeted alert to the PM.</li>
+                                <li>Digital approval is time-stamped.</li>
+                                <li>Full audit trail captured on the job record.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="kpi-card">
+                    <h3 class="text-xl font-bold text-[#D45087] mb-2">3. Digitize On-Site Paperwork</h3>
+                    <p class="text-gray-600 mb-4">Eliminate the need for printing, manually signing, and transporting paper forms like TV disclaimers and DWP checks by converting them into secure, signable digital worksheets on the mobile app.</p>
+                     <div class="flex items-center justify-center space-x-8 mt-12">
+                        <span class="text-8xl">📄</span>
+                        <span class="text-5xl font-bold text-[#D45087]">&rarr;</span>
+                        <span class="text-8xl">📱</span>
+                    </div>
+                    <p class="text-center mt-6 font-semibold">From Paper Forms to Digital Signatures</p>
+                </div>
+
+                <div class="kpi-card">
+                    <h3 class="text-xl font-bold text-[#F95D6A] mb-2">4. Automate Material Picking Lists</h3>
+                    <p class="text-gray-600 mb-4">Seamlessly convert a survey's cost sheet into an accurate, cost-free picking list for the warehouse. This ensures the right materials are ready for every job without exposing sensitive pricing information.</p>
+                     <div class="mt-8 text-center">
+                        <div class="p-3 bg-blue-50 border border-blue-200 rounded-lg inline-block">
+                             <span class="font-mono text-blue-800">Survey Cost Sheet</span>
+                        </div>
+                        <div class="h-10 w-px bg-gray-300 mx-auto my-2"></div>
+                        <div class="p-3 bg-green-50 border border-green-200 rounded-lg inline-block">
+                             <span class="font-mono text-green-800">Automated Picking List</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="kpi-card">
+                    <h3 class="text-xl font-bold text-[#FF7C43] mb-2">5. Consolidate & Centralize Data</h3>
+                    <p class="text-gray-600 mb-4">Create a single source of truth for every job. All customer details, notes, photos, documents, and communications will be housed in one central, easily accessible record, eliminating system-switching.</p>
+                     <div class="flex flex-col items-center justify-center mt-8">
+                        <div class="flex space-x-4">
+                             <span class="p-2 bg-gray-200 rounded-md text-sm">Installer</span>
+                             <span class="p-2 bg-gray-200 rounded-md text-sm">WhatsApp</span>
+                             <span class="p-2 bg-gray-200 rounded-md text-sm">G-Drive</span>
+                        </div>
+                        <div class="text-4xl my-3 text-[#FF7C43]">&darr;</div>
+                        <div class="p-4 bg-[#FF7C43] text-white rounded-lg shadow-lg">
+                            <span class="font-bold">Single Source of Truth</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: POC Scope -->
+        <section class="mb-16">
+             <h2 class="text-3xl font-bold text-center text-[#2F4B7C] mb-8">The Path Forward: POC Scope & Timeline</h2>
+             <p class="text-center text-gray-700 mb-10 max-w-3xl mx-auto">To achieve these goals, we will configure a tailored environment that mirrors and enhances your core operational processes. The POC will be built and tested over a concise period, focusing on high-impact areas.</p>
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="p-4 border-l-4 border-[#FFA600]">
+                        <h4 class="text-lg font-bold">End-to-End Workflow</h4>
+                        <p class="text-gray-600 mt-1">Configure a complete job lifecycle from lead creation, survey, and costing to multi-trade work scheduling and completion.</p>
+                    </div>
+                     <div class="p-4 border-l-4 border-[#F95D6A]">
+                        <h4 class="text-lg font-bold">Custom Forms & Worksheets</h4>
+                        <p class="text-gray-600 mt-1">Build digital versions of your key documents, including the Survey, On-Site Work Approval, TV Disclaimer, and DWP Check forms.</p>
+                    </div>
+                     <div class="p-4 border-l-4 border-[#D45087]">
+                        <h4 class="text-lg font-bold">Resource & Data Setup</h4>
+                        <p class="text-gray-600 mt-1">Onboard key field and office users for testing and import a sample of customer and material data to create a realistic test environment.</p>
+                    </div>
+                </div>
+                 <div class="mt-10 pt-6 border-t">
+                    <h4 class="text-lg font-bold text-center mb-4">Project Timeline</h4>
+                    <div class="relative w-full">
+                        <div class="w-full h-1 bg-gray-200 rounded-full"></div>
+                        <div class="absolute top-0 left-0 h-1 bg-[#A05195] rounded-full" style="width: 100%;"></div>
+                        <div class="absolute -top-3 flex w-full justify-between">
+                            <div class="text-center w-1/2">
+                                <div class="w-4 h-4 rounded-full bg-[#A05195] mx-auto mb-1 border-2 border-white"></div>
+                                <p class="text-sm font-semibold">Build & Config</p>
+                                <p class="text-xs text-gray-500">~3-4 Days</p>
+                            </div>
+                            <div class="text-center w-1/2">
+                                <div class="w-4 h-4 rounded-full bg-[#A05195] mx-auto mb-1 border-2 border-white"></div>
+                                <p class="text-sm font-semibold">User Testing & Playback</p>
+                                <p class="text-xs text-gray-500">2 Weeks</p>
+                            </div>
+                        </div>
+                    </div>
+                 </div>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            
+            const processLabel = (label, maxLength) => {
+                if (label.length <= maxLength) {
+                    return label;
+                }
+                const words = label.split(' ');
+                const lines = [];
+                let currentLine = '';
+                words.forEach(word => {
+                    if ((currentLine + word).length > maxLength) {
+                        lines.push(currentLine.trim());
+                        currentLine = '';
+                    }
+                    currentLine += word + ' ';
+                });
+                lines.push(currentLine.trim());
+                return lines;
+            };
+            
+            const tooltipTitleCallback = (tooltipItems) => {
+                const item = tooltipItems[0];
+                let label = item.chart.data.labels[item.dataIndex];
+                if (Array.isArray(label)) {
+                    return label.join(' ');
+                } else {
+                    return label;
+                }
+            };
+
+            const photoChartCtx = document.getElementById('photoProcessingChart');
+            if (photoChartCtx) {
+                new Chart(photoChartCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Manual Processing', 'Automated Tasks'],
+                        datasets: [{
+                            label: 'Effort Distribution',
+                            data: [70, 30],
+                            backgroundColor: ['#F95D6A', '#FFA600'],
+                            borderColor: ['#FFFFFF'],
+                            borderWidth: 4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        cutout: '70%',
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: {
+                                    font: {
+                                        size: 14,
+                                        family: 'Inter'
+                                    }
+                                }
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    title: tooltipTitleCallback
+                                }
+                            },
+                            title: {
+                                display: true,
+                                text: 'Current Effort vs. Projected with Automation',
+                                font: {
+                                    size: 16,
+                                    weight: '600',
+                                    family: 'Inter'
+                                },
+                                padding: {
+                                    bottom: 20
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
