@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retrofit Scotland Handover Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f9fc;
+        }
+        .header-bg {
+            background-color: #4CAF50; /* A shade of green found on the website */
+        }
+        .text-header {
+            color: #000000;
+        }
+        .section-header-bg {
+            background-color: #55a05e; /* Another shade of green from the website */
+        }
+        .container-shadow {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        .section-spacing {
+            margin-bottom: 2rem;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- Header Section -->
+    <header class="header-bg text-header py-8 px-6 text-center">
+        <div class="max-w-4xl mx-auto">
+            <h1 class="text-4xl font-bold mb-2">Retrofit Scotland</h1>
+            <h2 class="text-xl font-medium">20250917 - Retrofit Scotland Handover Guide</h2>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="max-w-4xl mx-auto py-10 px-6">
+        <div class="bg-white rounded-xl overflow-hidden container-shadow">
+            <div class="p-8">
+                <!-- Revision History -->
+                <section class="section-spacing">
+                    <h3 class="text-2xl font-bold section-header-bg text-white p-3 rounded-lg mb-4">Revision History</h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left table-auto">
+                            <thead>
+                                <tr class="bg-gray-100">
+                                    <th class="py-2 px-4 font-semibold">Version</th>
+                                    <th class="py-2 px-4 font-semibold">Date</th>
+                                    <th class="py-2 px-4 font-semibold">Author</th>
+                                    <th class="py-2 px-4 font-semibold">Description of Changes</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="py-2 px-4 border-b border-gray-200">1.0</td>
+                                    <td class="py-2 px-4 border-b border-gray-200">17/09/2025</td>
+                                    <td class="py-2 px-4 border-b border-gray-200">Matthew Beecham</td>
+                                    <td class="py-2 px-4 border-b border-gray-200">Initial Draft</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Introduction -->
+                <section class="section-spacing">
+                    <h3 class="text-2xl font-bold section-header-bg text-white p-3 rounded-lg mb-4">Introduction</h3>
+                    <p class="text-gray-700 leading-relaxed">
+                        This document serves as a handover guide for the Retrofit Scotland project, an energy solutions provider aiming to transition from manual, disparate processes to a unified, end-to-end workflow management system. The core objective is to solve the current problem of lost lead visibility and inefficient tracking by implementing a live, automated system. The proposed BigChange platform will provide a single source of truth for all project data, improving efficiency, compliance, and accountability from lead generation to job completion.
+                    </p>
+                </section>
+
+                <!-- Pain Points -->
+                <section class="section-spacing">
+                    <h3 class="text-2xl font-bold section-header-bg text-white p-3 rounded-lg mb-4">Pain Points</h3>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li><strong>Manual Processes:</strong> The current system relies heavily on manual work, using a combination of Dropbox, Excel spreadsheets, and a third-party app called Service Mate.</li>
+                        <li><strong>Loss of Visibility:</strong> It is easy to lose track of leads, with a potential for 50-60 leads per month being lost due to a lack of live tracking.</li>
+                        <li><strong>Lack of Real-Time Data:</strong> The Excel trackers only provide notes and don't offer a real-time, active reminder system for tasks.</li>
+                        <li><strong>No Centralized System:</strong> All different parts of the business—admin, submissions, surveyors, and installers—use separate platforms, which is inefficient and chaotic.</li>
+                    </ul>
+                </section>
+
+                <!-- Stakeholders -->
+                <section class="section-spacing">
+                    <h3 class="text-2xl font-bold section-header-bg text-white p-3 rounded-lg mb-4">Key Stakeholders</h3>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li><strong>Serge Fagelman (AE):</strong> Responsible for commercial aspects, client relationship, and deal progression. Engaged in all client meetings.</li>
+                        <li><strong>Dave Shaw (SE):</strong> Responsible for technical demonstration, solution design, and this project record. Engaged in all technical and pre-sales discussions.</li>
+                        <li><strong>Andrew Park Snr & Andrew Park (Prospect):</strong> Decision-makers providing key insights into current processes and future needs. Engaged in all meetings.</li>
+                        <li><strong>Linsay (Office):</strong> Handles initial lead contact.</li>
+                        <li><strong>Lee, Andrew, and Craig (Technical Review):</strong> Perform the technical survey and QA check.</li>
+                        <li><strong>Melissa (Scheduling):</strong> Responsible for booking installations.</li>
+                        <li><strong>Eilidh, Cammi, Ainsley, and Billie (Submissions):</strong> Responsible for submitting jobs to funders.</li>
+                    </ul>
+                </section>
+
+                <!-- Discussions to Date -->
+                <section class="section-spacing">
+                    <h3 class="text-2xl font-bold section-header-bg text-white p-3 rounded-lg mb-4">Discussions to Date</h3>
+                    <div class="space-y-6 text-gray-700">
+                        <p><strong>Summary of Discussions:</strong></p>
+                        <ul class="list-disc list-inside space-y-2">
+                            <li><strong>20250826:</strong> The initial discovery call identified that Retrofit Scotland is a company similar to Union Technical. The company relies on manual processes using Dropbox, Excel, and an app called Service Mate, which leads to a loss of lead visibility and a chaotic workflow. The key pain point is the desire for a single, streamlined system with live tracking and reminders to manage leads from initial contact to completion. The team is also interested in a solution that can track key financial metrics like 'ABS score.'</li>
+                            <li><strong>20250916:</strong> The follow-up playback session demonstrated a proof-of-concept system built on BigChange. The demo showed how leads are created as 'notes,' progress through a configurable workflow, and automatically generate a 'survey job' once qualified. Key features demonstrated included a mobile app for surveyors, automated email confirmations, and the ability to generate reports with photos and sign-offs directly from the system. It was clarified that the system is highly configurable and can be adapted to their specific needs. Discussions also touched on the per-user pricing model and the need for a separate discussion on the total number of licenses required.</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Current Systems & Processes -->
+                <section class="section-spacing">
+                    <h3 class="text-2xl font-bold section-header-bg text-white p-3 rounded-lg mb-4">Current Systems & Processes</h3>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li><strong>Current Systems in Use:</strong> Dropbox for storing documents and photos, Excel spreadsheets for tracking, and Service Mate for monitoring installers.</li>
+                        <li><strong>Integration Requirements with BigChange:</strong> No, this is a transition to a new end-to-end system to replace the current manual processes.</li>
+                    </ul>
+                </section>
+
+                <!-- Proposed Solution -->
+                <section class="section-spacing">
+                    <h3 class="text-2xl font-bold section-header-bg text-white p-3 rounded-lg mb-4">Proposed Solution</h3>
+                    <p class="text-gray-700 leading-relaxed">
+                        The proposed solution utilizes the BigChange platform to provide a comprehensive, integrated, and end-to-end workflow management system. The architecture is based on a series of interlinked jobs, notes, and custom automations. It addresses the client's pain points by providing a single source for managing leads, scheduling, and compliance. The workflow begins with a comprehensive 'ECO LEAD' note which, upon completion, automatically creates a survey job. This job includes configurable worksheets for surveyors to complete on-site, with mandatory steps for compliance. The system will also handle the generation of final reports and manage job submission to funders, providing real-time visibility throughout the entire lifecycle.
+                    </p>
+                </section>
+
+                <!-- Agreed Deliverables -->
+                <section class="section-spacing">
+                    <h3 class="text-2xl font-bold section-header-bg text-white p-3 rounded-lg mb-4">Agreed Deliverables for Implementation</h3>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li>Scheduling</li>
+                        <li>Financials</li>
+                        <li>Automations</li>
+                    </ul>
+                </section>
+
+                <!-- Functional Requirements Summary -->
+                <section class="section-spacing">
+                    <h3 class="text-2xl font-bold section-header-bg text-white p-3 rounded-lg mb-4">Functional Requirements Summary</h3>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li><strong>Scheduling Scenarios:</strong>
+                            <ul class="list-circle list-inside ml-4">
+                                <li><strong>Job Types:</strong> Confirmed job types include 'survey' and 'installation.'</li>
+                                <li><strong>Scheduling Patterns:</strong> The system needs to support scheduling individual jobs (e.g., surveys) and group jobs (e.g., installation, with different resources for different parts of the job).</li>
+                                <li><strong>Edge Cases/Complex Scenarios:</strong> The solution needs to handle scenarios where not all evidence is collected on the initial survey, and it should provide manual modification capabilities for worksheet answers.</li>
+                            </ul>
+                        </li>
+                        <li><strong>Financial Requirements:</strong>
+                            <ul class="list-circle list-inside ml-4">
+                                <li><strong>Pricing Logic:</strong> A per-user per-month fee.</li>
+                                <li><strong>Reporting Requirements:</strong> The ability to track a total monthly 'ABS score' which is a cumulative value from individual jobs. This data will be handled by exporting a custom report and totaling in a spreadsheet. Standard reporting and dashboards are also required for monitoring job performance and status.</li>
+                            </ul>
+                        </li>
+                        <li><strong>Automations Requirements:</strong> The proof of concept included several custom automations that will be replicated in the live environment. These include:
+                            <ul class="list-circle list-inside ml-4">
+                                <li>ECO4 - Create Job from ECO4 Note</li>
+                                <li>ECO4 - Set Tag to Awaiting Survey</li>
+                                <li>ECO4 - Set tag to Qualifies</li>
+                                <li>ECO4 - Set tag to Does Not Qualify</li>
+                                <li>ECO4 - Set tag to Survey Booked</li>
+                                <li>ECO4 - Set Tag to Confirmation Sent</li>
+                                <li>ECO4 - Set Tag to Survey Visit Confirmed</li>
+                                <li>ECO4 - Set measures requested on survey worksheet</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- Outstanding / To Be Confirmed -->
+                <section class="section-spacing">
+                    <h3 class="text-2xl font-bold section-header-bg text-white p-3 rounded-lg mb-4">Outstanding / To Be Confirmed</h3>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li><strong>Lead Generator Integration:</strong> This is a potential future requirement that needs to be investigated by the Partnership Team (James Cannon, Melissa Adey/Leanne Barr).</li>
+                        <li><strong>ECO Scoring:</strong> The full scope of required data points for ECO scoring needs to be verified with Retrofit Scotland.</li>
+                    </ul>
+                </section>
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>
