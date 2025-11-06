@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BigChange FSM Demo Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'bc-blue': '#003366', // Deep Blue
+                        'bc-orange': '#FF6600', // Vibrant Orange
+                        'bc-light': '#F7F7F7',
+                        'bc-accent': '#00AEEF', // Lighter accent blue
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Lucide Icons (Inline SVGs) */
+        .icon {
+            display: inline-block;
+            width: 1.5em;
+            height: 1.5em;
+            stroke-width: 2;
+            stroke: currentColor;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* Custom animation for the gradient header */
+        @keyframes pulse-bg {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .header-bg {
+            background: linear-gradient(-45deg, #003366, #00AEEF, #003366);
+            background-size: 400% 400%;
+            animation: pulse-bg 15s ease infinite;
+        }
+    </style>
+</head>
+<body class="bg-bc-light text-bc-blue font-sans">
+
+    <!-- Header Section -->
+    <header class="header-bg text-white shadow-xl p-6 md:p-10 rounded-b-3xl">
+        <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-2 text-center">
+            The BigChange Demonstration Guide
+        </h1>
+        <p class="text-center text-lg font-light opacity-90">
+            A practical framework for a successful Field Service Management solution demo.
+        </p>
+    </header>
+
+    <main class="container mx-auto p-4 md:p-8 max-w-7xl">
+
+        <!-- Grid of Principles -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-4">
+
+            <!-- 1. INVESTIGATE & PREPARE -->
+            <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-bc-orange hover:shadow-2xl transition duration-300">
+                <div class="text-bc-orange mb-3">
+                    <svg class="icon w-8 h-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 2a9 9 0 0 1 9 9v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V11a9 9 0 0 1 8-9z"/><path d="M12 2v9"/><path d="M7 16h10"/></svg>
+                </div>
+                <h2 class="text-2xl font-bold mb-3 text-bc-blue">Deep Dive Research</h2>
+                <ul class="space-y-2 text-gray-700 list-disc pl-5">
+                    <li><b>Investigate:</b> Use the internet (Companies House, Website) to find services, roles, and employee numbers.</li>
+                    <li><b>Preparation:</b> Refresh knowledge the day before. Verify all hardware (mobile device, tablet, headphones) and software are charged and working.</li>
+                    <li><b>Pre-Check:</b> Do not ask questions you could have researched (e.g., "What services do you offer?").</li>
+                </ul>
+            </div>
+
+            <!-- 2. DATA IS KING -->
+            <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-bc-accent hover:shadow-2xl transition duration-300">
+                <div class="text-bc-accent mb-3">
+                    <svg class="icon w-8 h-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2.69l7.71 7.71a2 2 0 0 1 0 2.83l-7.71 7.71a2 2 0 0 1-2.83 0l-7.71-7.71a2 2 0 0 1 0-2.83l7.71-7.71a2 2 0 0 1 2.83 0z"/><path d="M10 14h4"/><path d="M12 12v4"/></svg>
+                </div>
+                <h2 class="text-2xl font-bold mb-3 text-bc-blue">Contextualize Your Data</h2>
+                <ul class="space-y-2 text-gray-700 list-disc pl-5">
+                    <li><b>Crucial Match:</b> Use data *specific* to the customer's industry (e.g., Grounds Maintenance data for a GM company).</li>
+                    <li><b>NEVER:</b> Say, "I know this isn't your data, but you get the idea." They won't.</li>
+                    <li><b>Personalize CRM:</b> Find their address on Google Maps, then create a customer *very close* to their location in the CRM to show preparation.</li>
+                </ul>
+            </div>
+
+            <!-- 3. TIME MANAGEMENT & FOCUS -->
+            <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-bc-orange hover:shadow-2xl transition duration-300">
+                <div class="text-bc-orange mb-3">
+                    <svg class="icon w-8 h-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                </div>
+                <h2 class="text-2xl font-bold mb-3 text-bc-blue">Focus & Time Control</h2>
+                <ul class="space-y-2 text-gray-700 list-disc pl-5">
+                    <li><b>The 30-Minute Rule:</b> Out of 45 minutes, realistically only 30 minutes are for the demo itself (after intros/conclusions).</li>
+                    <li><b>Show Less, Mean More:</b> Focus on what's critical. It's <b>not what you show, but what you don't show</b> that makes the presentation worthwhile.</li>
+                    <li><b>Be the Leader:</b> You must lead the meeting. It is easy to be "hijacked," making it difficult to turn the discussion back around.</li>
+                </ul>
+            </div>
+
+            <!-- 4. PROFESSIONAL CONDUCT -->
+            <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-bc-accent hover:shadow-2xl transition duration-300">
+                <div class="text-bc-accent mb-3">
+                    <svg class="icon w-8 h-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.72"/><path d="M11 3h3"/></svg>
+                </div>
+                <h2 class="text-2xl font-bold mb-3 text-bc-blue">Build Trust</h2>
+                <ul class="space-y-2 text-gray-700 list-disc pl-5">
+                    <li><b>People Buy From People:</b> Trust is key. If the buyer doesn't "gel" with the seller, the deal may fail.</li>
+                    <li><b>Dress Code:</b> Dress smart, and wear BigChange branded wear if possible.</li>
+                    <li><b>Clarify:</b> Do not assume. Always ask for clarification of unknown or unusual terms.</li>
+                    <li><b>Agenda:</b> If possible, have and stick to a pre-defined agenda.</li>
+                </ul>
+            </div>
+
+            <!-- 5. HANDLING QUESTIONS -->
+            <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-bc-orange hover:shadow-2xl transition duration-300">
+                <div class="text-bc-orange mb-3">
+                    <svg class="icon w-8 h-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.09 18v3m0-8v4"/><path d="M18.37 12.28A6.38 6.38 0 0 0 12 5.5"/><path d="M5.63 12.28A6.38 6.38 0 0 1 12 19.5"/><path d="M3 13.5h7.5"/><path d="M13.5 13.5H21"/></svg>
+                </div>
+                <h2 class="text-2xl font-bold mb-3 text-bc-blue">Be Honest, Follow Up</h2>
+                <ul class="space-y-2 text-gray-700 list-disc pl-5">
+                    <li><b>Valid Answer:</b> "I do not know" is a valid answer.</li>
+                    <li><b>The Caveat:</b> You <b>MUST</b> agree to find the answer and follow up (e.g., "I will get one of my technical people to investigate and get back to you.").</li>
+                    <li><b>Crucial Action:</b> <b>YOU MUST GET BACK TO THEM.</b></li>
+                </ul>
+            </div>
+
+            <!-- 6. MEETING COMPOSITION & MEDDICC -->
+            <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-bc-accent hover:shadow-2xl transition duration-300">
+                <div class="text-bc-accent mb-3">
+                    <svg class="icon w-8 h-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 21v-4M12 3v4M5 14h14M5 10h14M17 7l-5-5-5 5M17 17l-5 5-5-5"/></svg>
+                </div>
+                <h2 class="text-2xl font-bold mb-3 text-bc-blue">Optimize & Strategize</h2>
+                <ul class="space-y-2 text-gray-700 list-disc pl-5">
+                    <li><b>Avoid:</b> Meetings with too many people from multiple departments (can become a shambles).</li>
+                    <li><b>Be Wary Of:</b> Meetings led by the IT team (they may not have the operational team's best interests at heart).</li>
+                    <li><b>Remember:</b> The <b>MEDDICC</b> sales qualification framework. </li>
+                </ul>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Footer / Key Takeaway -->
+    <footer class="bg-bc-blue text-white mt-10 p-6 md:p-8 rounded-t-3xl text-center">
+        <h3 class="text-xl font-semibold mb-2">Key Takeaway</h3>
+        <p class="font-light max-w-3xl mx-auto">
+            A successful BigChange demo is built on <b>trust, preparation, and relevance</b>. Customize the experience, manage the time, and always, always follow through on your commitments.
+        </p>
+    </footer>
+
+</body>
+</html>
