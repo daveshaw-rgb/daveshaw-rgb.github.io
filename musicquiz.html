@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Music Quiz</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 390px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 28px;
+        }
+
+        .screen {
+            display: none;
+        }
+
+        .screen.active {
+            display: block;
+        }
+
+        .decade-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .decade-btn {
+            padding: 30px 20px;
+            border: none;
+            border-radius: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+            min-height: 80px;
+        }
+
+        .decade-btn:active {
+            transform: scale(0.95);
+        }
+
+        .decade-btn:hover {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-1960s { background: #28a745; }
+        .btn-1970s { background: #ff69b4; }
+        .btn-1980s { background: #ffd700; }
+        .btn-1990s { background: #007bff; }
+        .btn-2000s { background: #6f42c1; }
+        .btn-2010s { background: #dc3545; }
+
+        .track-info {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .album-art {
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .track-title {
+            font-size: 22px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .track-artist {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .track-decade {
+            display: inline-block;
+            padding: 5px 15px;
+            background: #667eea;
+            color: white;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .action-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .action-btn {
+            padding: 20px;
+            border: none;
+            border-radius: 15px;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .action-btn:active {
+            transform: scale(0.98);
+        }
+
+        .btn-play {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .btn-tidal {
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+        }
+
+        .btn-bonus {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .back-btn {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .back-btn:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .trivia-panel {
+            display: none;
+            background: #fff3cd;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            border: 2px solid #ffc107;
+        }
+
+        .trivia-panel.show {
+            display: block;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .trivia-question {
+            font-size: 16px;
+            font-weight: bold;
+            color: #856404;
+            margin-bottom: 15px;
+        }
+
+        .trivia-answer {
+            font-size: 16px;
+            color: #004085;
+            background: #cce5ff;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #004085;
+        }
+
+        .answer-label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Music Quiz</h1>
+
+        <!-- Main Screen: Decade Selection -->
+        <div id="mainScreen" class="screen active">
+            <div class="decade-grid">
+                <button class="decade-btn btn-1960s" onclick="selectDecade('1960s')">1960s</button>
+                <button class="decade-btn btn-1970s" onclick="selectDecade('1970s')">1970s</button>
+                <button class="decade-btn btn-1980s" onclick="selectDecade('1980s')">1980s</button>
+                <button class="decade-btn btn-1990s" onclick="selectDecade('1990s')">1990s</button>
+                <button class="decade-btn btn-2000s" onclick="selectDecade('2000s')">2000s</button>
+                <button class="decade-btn btn-2010s" onclick="selectDecade('2010s')">2010s</button>
+            </div>
+        </div>
+
+        <!-- Track Screen: Play and Bonus -->
+        <div id="trackScreen" class="screen">
+            <div class="track-info">
+                <img id="albumArt" class="album-art" src="" alt="Album artwork">
+                <div class="track-title" id="trackTitle"></div>
+                <div class="track-artist" id="trackArtist"></div>
+                <div class="track-decade" id="trackDecade"></div>
+            </div>
+
+            <div class="action-buttons">
+                <button class="action-btn btn-play" onclick="playTrack()">PLAY YOUTUBE</button>
+                <button class="action-btn btn-tidal" onclick="playTidal()">PLAY TIDAL</button>
+                <button class="action-btn btn-bonus" onclick="showBonus()">BONUS</button>
+            </div>
+
+            <div id="triviaPanel" class="trivia-panel">
+                <div class="trivia-question" id="triviaQuestion"></div>
+                <div class="trivia-answer">
+                    <span class="answer-label">Answer:</span>
+                    <span id="triviaAnswer"></span>
+                </div>
+            </div>
+
+            <button class="back-btn" onclick="goBack()">Back to Decades</button>
+        </div>
+    </div>
+
+    <script>
+        const musicData = {
+            '1960s': [
+                {
+                    title: "Hey Jude",
+                    artist: "The Beatles",
+                    youtubeId: "A_MjCqQoLLA",
+                    trivia: {
+                        question: "Who was this song originally written for?",
+                        answer: "Julian Lennon, John Lennon's son, to comfort him during his parents' divorce"
+                    }
+                },
+                {
+                    title: "Respect",
+                    artist: "Aretha Franklin",
+                    youtubeId: "6FOUqQt3Kg0",
+                    trivia: {
+                        question: "Who originally wrote and recorded this song?",
+                        answer: "Otis Redding wrote and recorded it first in 1965"
+                    }
+                },
+                {
+                    title: "Like a Rolling Stone",
+                    artist: "Bob Dylan",
+                    youtubeId: "IwOfCgkyEj0",
+                    trivia: {
+                        question: "What was revolutionary about this song's length?",
+                        answer: "At over 6 minutes, it was unusually long for a single and changed radio standards"
+                    }
+                },
+                {
+                    title: "Good Vibrations",
+                    artist: "The Beach Boys",
+                    youtubeId: "Eab_beh07HU",
+                    trivia: {
+                        question: "What unique instrument is featured in this song?",
+                        answer: "The theremin, one of the first electronic instruments"
+                    }
+                },
+                {
+                    title: "Purple Haze",
+                    artist: "Jimi Hendrix",
+                    youtubeId: "WGoDaYjdfSg",
+                    trivia: {
+                        question: "What instrument is Jimi Hendrix famous for playing?",
+                        answer: "Electric guitar - he's considered one of the greatest guitarists of all time"
+                    }
+                },
+                {
+                    title: "I Want to Hold Your Hand",
+                    artist: "The Beatles",
+                    youtubeId: "jenWdylTtzs",
+                    trivia: {
+                        question: "What country did The Beatles invade in 1964?",
+                        answer: "The United States - this was the start of the 'British Invasion'"
+                    }
+                },
+                {
+                    title: "(Sittin' On) The Dock of the Bay",
+                    artist: "Otis Redding",
+                    youtubeId: "rTVjnBo96Ug",
+                    trivia: {
+                        question: "When was this song released in relation to Otis Redding's death?",
+                        answer: "Released posthumously in 1968, just days after his death in a plane crash"
+                    }
+                },
+                {
+                    title: "My Girl",
+                    artist: "The Temptations",
+                    youtubeId: "C_CSjcm-z1w",
+                    trivia: {
+                        question: "What record label were The Temptations signed to?",
+                        answer: "Motown Records, the legendary Detroit soul label"
+                    }
+                },
+                {
+                    title: "You Really Got Me",
+                    artist: "The Kinks",
+                    youtubeId: "fTTsY-oz6Go",
+                    trivia: {
+                        question: "What guitar effect did this song help popularize?",
+                        answer: "Power chords and distortion, influencing heavy metal and punk rock"
+                    }
+                }
+            ],
+            '1970s': [
+                {
+                    title: "Bohemian Rhapsody",
+                    artist: "Queen",
+                    youtubeId: "fJ9rUzIMcZQ",
+                    trivia: {
+                        question: "Who is the lead singer of Queen?",
+                        answer: "Freddie Mercury"
+                    }
+                },
+                {
+                    title: "Stayin' Alive",
+                    artist: "Bee Gees",
+                    youtubeId: "fNFzfwLM72c",
+                    trivia: {
+                        question: "What iconic movie featured this song?",
+                        answer: "Saturday Night Fever (1977)"
+                    }
+                },
+                {
+                    title: "Hotel California",
+                    artist: "Eagles",
+                    youtubeId: "EqPtz5qN7HM",
+                    trivia: {
+                        question: "What album is this song from?",
+                        answer: "Hotel California (1976)"
+                    }
+                },
+                {
+                    title: "Imagine",
+                    artist: "John Lennon",
+                    youtubeId: "YkgkThdzX-8",
+                    trivia: {
+                        question: "What famous band was John Lennon a member of before his solo career?",
+                        answer: "The Beatles"
+                    }
+                },
+                {
+                    title: "Le Freak",
+                    artist: "Chic",
+                    youtubeId: "h1qQ1SKNlgY",
+                    trivia: {
+                        question: "What dance style is this song associated with?",
+                        answer: "Disco - it was one of the biggest disco hits of the late 1970s"
+                    }
+                },
+                {
+                    title: "Dreams",
+                    artist: "Fleetwood Mac",
+                    youtubeId: "mrZRURcb1cM",
+                    trivia: {
+                        question: "What album is this song from?",
+                        answer: "Rumours (1977), one of the best-selling albums ever"
+                    }
+                },
+                {
+                    title: "I Will Survive",
+                    artist: "Gloria Gaynor",
+                    youtubeId: "ZBR2G-iI3-I",
+                    trivia: {
+                        question: "What has this song become an anthem for?",
+                        answer: "Empowerment and resilience, particularly in the LGBT community"
+                    }
+                },
+                {
+                    title: "Superstition",
+                    artist: "Stevie Wonder",
+                    youtubeId: "0CFuCYNx-1g",
+                    trivia: {
+                        question: "What instrument does Stevie Wonder primarily play?",
+                        answer: "Piano and keyboards, though he plays multiple instruments"
+                    }
+                },
+                {
+                    title: "Dancing Queen",
+                    artist: "ABBA",
+                    youtubeId: "xFrGuyw1V8s",
+                    trivia: {
+                        question: "What country is ABBA from?",
+                        answer: "Sweden"
+                    }
+                }
+            ],
+            '1980s': [
+                {
+                    title: "Billie Jean",
+                    artist: "Michael Jackson",
+                    youtubeId: "Zi_XLOBDo_Y",
+                    trivia: {
+                        question: "What album is this song from?",
+                        answer: "Thriller (1982), the best-selling album of all time"
+                    }
+                },
+                {
+                    title: "Sweet Child O' Mine",
+                    artist: "Guns N' Roses",
+                    youtubeId: "1w7OgIMMRc4",
+                    trivia: {
+                        question: "Who is the lead guitarist of Guns N' Roses?",
+                        answer: "Slash"
+                    }
+                },
+                {
+                    title: "Like a Prayer",
+                    artist: "Madonna",
+                    youtubeId: "79fzeNUqQbQ",
+                    trivia: {
+                        question: "What controversial imagery was in the music video?",
+                        answer: "Religious imagery including burning crosses and stigmata"
+                    }
+                },
+                {
+                    title: "Every Breath You Take",
+                    artist: "The Police",
+                    youtubeId: "OMOGaugKpzs",
+                    trivia: {
+                        question: "Who is the lead singer of The Police?",
+                        answer: "Sting"
+                    }
+                },
+                {
+                    title: "Take On Me",
+                    artist: "a-ha",
+                    youtubeId: "djV11Xbc914",
+                    trivia: {
+                        question: "What animation style is the music video famous for?",
+                        answer: "Rotoscoping - a mix of live-action and pencil-sketch animation"
+                    }
+                },
+                {
+                    title: "Africa",
+                    artist: "Toto",
+                    youtubeId: "FTQbiNvZqaY",
+                    trivia: {
+                        question: "What album is this song from?",
+                        answer: "Toto IV (1982)"
+                    }
+                },
+                {
+                    title: "Don't Stop Believin'",
+                    artist: "Journey",
+                    youtubeId: "1k8craCGpgs",
+                    trivia: {
+                        question: "What TV show caused a massive resurgence in this song's popularity?",
+                        answer: "The Sopranos finale in 2007"
+                    }
+                },
+                {
+                    title: "Livin' on a Prayer",
+                    artist: "Bon Jovi",
+                    youtubeId: "lDK9QqIzhwk",
+                    trivia: {
+                        question: "What are the names of the couple in the song?",
+                        answer: "Tommy and Gina"
+                    }
+                },
+                {
+                    title: "Girls Just Want to Have Fun",
+                    artist: "Cyndi Lauper",
+                    youtubeId: "PIb6AZdTr-A",
+                    trivia: {
+                        question: "Was Cyndi Lauper the first to record this song?",
+                        answer: "No, it was originally written and recorded by Robert Hazard in 1979"
+                    }
+                }
+            ],
+            '1990s': [
+                {
+                    title: "Smells Like Teen Spirit",
+                    artist: "Nirvana",
+                    youtubeId: "hTWKbfoikeg",
+                    trivia: {
+                        question: "Who was the lead singer of Nirvana?",
+                        answer: "Kurt Cobain"
+                    }
+                },
+                {
+                    title: "Wonderwall",
+                    artist: "Oasis",
+                    youtubeId: "bx1Bh8ZvH84",
+                    trivia: {
+                        question: "What album is this song from?",
+                        answer: "(What's the Story) Morning Glory? (1995)"
+                    }
+                },
+                {
+                    title: "No Scrubs",
+                    artist: "TLC",
+                    youtubeId: "FrLequ6dUdM",
+                    trivia: {
+                        question: "How many members were in TLC?",
+                        answer: "Three members: Tionne 'T-Boz' Watkins, Lisa 'Left Eye' Lopes, and Rozonda 'Chilli' Thomas"
+                    }
+                },
+                {
+                    title: "Baby One More Time",
+                    artist: "Britney Spears",
+                    youtubeId: "C-u5WLJ9Yk4",
+                    trivia: {
+                        question: "What was Britney's iconic outfit in the music video?",
+                        answer: "A schoolgirl outfit with a gray pleated skirt and pink top"
+                    }
+                },
+                {
+                    title: "Creep",
+                    artist: "Radiohead",
+                    youtubeId: "XFkzRNyygfk",
+                    trivia: {
+                        question: "What album is this song from?",
+                        answer: "Pablo Honey (1993), Radiohead's debut album"
+                    }
+                },
+                {
+                    title: "Wannabe",
+                    artist: "Spice Girls",
+                    youtubeId: "gJLIiF15wjQ",
+                    trivia: {
+                        question: "How many members were in the Spice Girls?",
+                        answer: "Five: Scary, Sporty, Baby, Ginger, and Posh Spice"
+                    }
+                },
+                {
+                    title: "Gangsta's Paradise",
+                    artist: "Coolio ft. L.V.",
+                    youtubeId: "fPO76Jlnz6c",
+                    trivia: {
+                        question: "What movie featured this song?",
+                        answer: "Dangerous Minds (1995) starring Michelle Pfeiffer"
+                    }
+                },
+                {
+                    title: "Losing My Religion",
+                    artist: "R.E.M.",
+                    youtubeId: "xwtdhWltSIg",
+                    trivia: {
+                        question: "What instrument is prominently featured in this song?",
+                        answer: "The mandolin"
+                    }
+                },
+                {
+                    title: "Black Hole Sun",
+                    artist: "Soundgarden",
+                    youtubeId: "3mbBbFH9fAg",
+                    trivia: {
+                        question: "Who was the lead singer of Soundgarden?",
+                        answer: "Chris Cornell"
+                    }
+                }
+            ],
+            '2000s': [
+                {
+                    title: "Crazy in Love",
+                    artist: "Beyoncé ft. Jay-Z",
+                    youtubeId: "ViwtNLUqkMY",
+                    trivia: {
+                        question: "What girl group was Beyoncé part of before going solo?",
+                        answer: "Destiny's Child"
+                    }
+                },
+                {
+                    title: "Hey Ya!",
+                    artist: "OutKast",
+                    youtubeId: "PWgvGjAhvIw",
+                    trivia: {
+                        question: "What album is this song from?",
+                        answer: "Speakerboxxx/The Love Below (2003), a double album"
+                    }
+                },
+                {
+                    title: "Rehab",
+                    artist: "Amy Winehouse",
+                    youtubeId: "KUmZp8pR1uc",
+                    trivia: {
+                        question: "What album is this song from?",
+                        answer: "Back to Black (2006)"
+                    }
+                },
+                {
+                    title: "Mr. Brightside",
+                    artist: "The Killers",
+                    youtubeId: "gGdGFtwCNBE",
+                    trivia: {
+                        question: "What is the hometown of The Killers?",
+                        answer: "Las Vegas, Nevada"
+                    }
+                },
+                {
+                    title: "In Da Club",
+                    artist: "50 Cent",
+                    youtubeId: "5qm8PH4xAss",
+                    trivia: {
+                        question: "Who produced this song?",
+                        answer: "Dr. Dre and Mike Elizondo"
+                    }
+                },
+                {
+                    title: "Seven Nation Army",
+                    artist: "The White Stripes",
+                    youtubeId: "0J2QdDbelmY",
+                    trivia: {
+                        question: "How many members were in The White Stripes?",
+                        answer: "Two: Jack White (guitar/vocals) and Meg White (drums)"
+                    }
+                },
+                {
+                    title: "Beautiful Day",
+                    artist: "U2",
+                    youtubeId: "co6WMzDOh1o",
+                    trivia: {
+                        question: "What album is this song from?",
+                        answer: "All That You Can't Leave Behind (2000)"
+                    }
+                },
+                {
+                    title: "Since U Been Gone",
+                    artist: "Kelly Clarkson",
+                    youtubeId: "R7UrFYvl5TE",
+                    trivia: {
+                        question: "What TV show did Kelly Clarkson win to start her career?",
+                        answer: "American Idol - she was the first winner in 2002"
+                    }
+                },
+                {
+                    title: "Toxic",
+                    artist: "Britney Spears",
+                    youtubeId: "LOZuxwVk7TU",
+                    trivia: {
+                        question: "What award did this song win?",
+                        answer: "Grammy Award for Best Dance Recording in 2005"
+                    }
+                }
+            ],
+            '2010s': [
+                {
+                    title: "Rolling in the Deep",
+                    artist: "Adele",
+                    youtubeId: "rYEDA3JcQqw",
+                    trivia: {
+                        question: "What album is this song from?",
+                        answer: "21 (2011), named after Adele's age at the time"
+                    }
+                },
+                {
+                    title: "Uptown Funk",
+                    artist: "Mark Ronson ft. Bruno Mars",
+                    youtubeId: "OPf0YbXqDm0",
+                    trivia: {
+                        question: "How many weeks did this song spend at number 1 on the Billboard Hot 100?",
+                        answer: "14 consecutive weeks in 2015"
+                    }
+                },
+                {
+                    title: "Shape of You",
+                    artist: "Ed Sheeran",
+                    youtubeId: "JGwWNGJdvx8",
+                    trivia: {
+                        question: "What album is this song from?",
+                        answer: "÷ (Divide), released in 2017"
+                    }
+                },
+                {
+                    title: "Happy",
+                    artist: "Pharrell Williams",
+                    youtubeId: "ZbZSe6N_BXs",
+                    trivia: {
+                        question: "What animated movie was this song featured in?",
+                        answer: "Despicable Me 2 (2013)"
+                    }
+                },
+                {
+                    title: "Blinding Lights",
+                    artist: "The Weeknd",
+                    youtubeId: "4NRXx6U8ABQ",
+                    trivia: {
+                        question: "What decade's sound does this song pay homage to?",
+                        answer: "The 1980s synth-pop era"
+                    }
+                },
+                {
+                    title: "Get Lucky",
+                    artist: "Daft Punk ft. Pharrell Williams",
+                    youtubeId: "5NV6Rdv1a3I",
+                    trivia: {
+                        question: "What album is this song from?",
+                        answer: "Random Access Memories (2013)"
+                    }
+                },
+                {
+                    title: "Radioactive",
+                    artist: "Imagine Dragons",
+                    youtubeId: "ktvTqknDobU",
+                    trivia: {
+                        question: "What record did this song break on the Billboard Hot 100?",
+                        answer: "Most weeks on the chart - 87 weeks"
+                    }
+                },
+                {
+                    title: "Somebody That I Used to Know",
+                    artist: "Gotye ft. Kimbra",
+                    youtubeId: "8UVNT4wvIGY",
+                    trivia: {
+                        question: "What country is Gotye from?",
+                        answer: "Australia (Belgium-born, Australian-raised)"
+                    }
+                },
+                {
+                    title: "Bad Guy",
+                    artist: "Billie Eilish",
+                    youtubeId: "DyDfgMOUjCI",
+                    trivia: {
+                        question: "Who did Billie Eilish write and produce this song with?",
+                        answer: "Her brother Finneas O'Connell"
+                    }
+                }
+            ]
+        };
+
+        let currentTrack = null;
+        let currentDecade = null;
+
+        function selectDecade(decade) {
+            currentDecade = decade;
+            const tracks = musicData[decade];
+            currentTrack = tracks[Math.floor(Math.random() * tracks.length)];
+
+            document.getElementById('albumArt').src = `https://img.youtube.com/vi/${currentTrack.youtubeId}/mqdefault.jpg`;
+            document.getElementById('trackTitle').textContent = currentTrack.title;
+            document.getElementById('trackArtist').textContent = currentTrack.artist;
+            document.getElementById('trackDecade').textContent = decade;
+
+            document.getElementById('triviaPanel').classList.remove('show');
+
+            document.getElementById('mainScreen').classList.remove('active');
+            document.getElementById('trackScreen').classList.add('active');
+        }
+
+        function playTrack() {
+            const youtubeUrl = `https://www.youtube.com/watch?v=${currentTrack.youtubeId}`;
+            window.open(youtubeUrl, '_blank');
+        }
+
+        function playTidal() {
+            const searchQuery = encodeURIComponent(`${currentTrack.artist} ${currentTrack.title}`);
+            const tidalUrl = `https://listen.tidal.com/search?q=${searchQuery}`;
+            window.open(tidalUrl, '_blank');
+        }
+
+        function showBonus() {
+            document.getElementById('triviaQuestion').textContent = currentTrack.trivia.question;
+            document.getElementById('triviaAnswer').textContent = currentTrack.trivia.answer;
+            document.getElementById('triviaPanel').classList.add('show');
+        }
+
+        function goBack() {
+            document.getElementById('trackScreen').classList.remove('active');
+            document.getElementById('mainScreen').classList.add('active');
+            document.getElementById('triviaPanel').classList.remove('show');
+            currentTrack = null;
+            currentDecade = null;
+        }
+    </script>
+</body>
+</html>
